@@ -1,0 +1,1890 @@
+Player 2 enters wait state
+Player 3 enters wait state
+Player 4 enters wait state
+Player 5 enters wait state
+Player 7 enters wait state
+Player 8 enters wait state
+Player 9 enters wait state
+Player 10 enters wait state
+Player 3 enters chase state
+Player 8 enters chase state
+Player 3 enters kick state
+Player 8 enters kick state
+Player 3 passes the ball with force 3  to player 4  Target is  189.905 206.822
+Player 4 enters receive state (Using Arrive)
+Player 3 enters wait state
+Player 3 enters support state
+Player 8 passes the ball with force 3  to player 10  Target is  503.844 140
+Player 10 enters receive state (Using Arrive)
+Player 8 enters wait state
+Player 8 enters support state
+Player 3 enters ReturnToHome state
+Player 4 enters chase state
+Nikhil entering NikhilAttacking state
+Player 3 enters chase state
+Player 4 enters ReturnToHome state
+Player 4 enters wait state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 passes the ball with force 2.99946  to player 9  Target is  321.124 48.4378
+Player 9 enters receive state (Using Pursuit)
+Player 10 enters wait state
+Player 9 received request from 8 to make pass
+Player 9 cannot make requested pass <cannot kick ball>
+Player 9 received request from 8 to make pass
+Player 9 cannot make requested pass <cannot kick ball>
+Player 9 received request from 8 to make pass
+Player 9 cannot make requested pass <cannot kick ball>
+Player 9 enters chase state
+Player 9 enters kick state
+Player 9 passes the ball with force 3  to player 8  Target is  260.953 174.214
+Player 8 enters receive state (Using Arrive)
+Player 9 enters wait state
+Player 7 enters support state
+Player 8 received request from 7 to make pass
+Player 8 cannot make requested pass <cannot kick ball>
+Player 8 received request from 7 to make pass
+Player 8 cannot make requested pass <cannot kick ball>
+Player 8 enters chase state
+Player 8 enters kick state
+Player 3 enters ReturnToHome state
+Player 4 enters chase state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 3 enters wait state
+Player 4 enters kick state
+Player 4 received request from 5 to make pass
+Player 4 Passed ball to requesting player
+Player 5 enters receive state (Using Arrive)
+Player 4 enters wait state
+Player 3 enters support state
+Nikhil entering NikhilDefending state
+Player 7 enters ReturnToHome state
+Beanz entering Attacking state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 passes the ball with force 3  to player 1  Target is  38.2958 138.111
+Player 5 enters wait state
+Player 5 enters chase state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 8 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 8 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 8 enters chase state
+Player 7 enters wait state
+Player 5 enters wait state
+Player 9 enters wait state
+Player 10 enters wait state
+Player 3 enters wait state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 2 enters wait state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 received request from 2 to make pass
+Player 4 Passed ball to requesting player
+Player 2 enters receive state (Using Pursuit)
+Player 4 enters wait state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters kick state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters kick state
+Goaly has ball / ball behind player
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 7 enters chase state
+Player 8 enters ReturnToHome state
+Player 7 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 7 passes the ball with force 2.99154  to player 10  Target is  499.101 202.908
+Player 10 enters receive state (Using Arrive)
+Player 7 enters wait state
+Player 8 enters support state
+Player 10 received request from 7 to make pass
+Player 10 cannot make requested pass <cannot kick ball>
+Player 3 enters wait state
+Player 10 received request from 7 to make pass
+Player 10 cannot make requested pass <cannot kick ball>
+Player 2 enters ReturnToHome state
+Player 3 enters chase state
+Player 2 enters wait state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 2 enters wait state
+Nikhil entering NikhilAttacking state
+Player 10 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters wait state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 2 enters wait state
+Player 10 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Beanz entering Attacking state
+Player 3 enters kick state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 2 enters chase state
+Player 3 enters ReturnToHome state
+Player 2 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 enters support state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 received request from 3 to make pass
+Player 2 cannot make requested pass <cannot kick ball>
+Player 10 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 10 passes the ball with force 2.62241  to player 6  Target is  651.281 285.074
+Player 10 enters wait state
+Player 8 enters support state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 3 enters wait state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 10 enters receive state (Using Pursuit)
+Player 2 enters chase state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 10 enters receive state (Using Pursuit)
+Player 2 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 2 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Player 10 enters chase state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 2 enters chase state
+Nikhil entering NikhilAttacking state
+Player 2 enters chase state
+Player 2 enters kick state
+Nikhil entering NikhilDefending state
+Beanz entering Attacking state
+Player 2 enters kick state
+Player 3 enters support state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters kick state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters kick state
+Goaly has ball / ball behind player
+Player 2 enters chase state
+Player 4 enters wait state
+Player 5 enters wait state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 2 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Player 10 enters chase state
+Beanz entering Attacking state
+Player 2 passes the ball with force 2.94267  to player 4  Target is  273.353 217.579
+Player 4 enters receive state (Using Arrive)
+Player 2 enters wait state
+Player 3 enters support state
+Player 10 enters chase state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Player 4 enters chase state
+Nikhil entering NikhilAttacking state
+Player 4 enters ReturnToHome state
+Player 7 enters chase state
+Player 10 enters ReturnToHome state
+Player 3 enters wait state
+Player 7 enters ReturnToHome state
+Player 8 enters chase state
+Player 10 enters wait state
+Player 
+4 enters wait state
+Player 2 enters chase state
+Player 2 enters ReturnToHome state
+Player 4 enters chase state
+Player 2 enters wait state
+Player 4 enters kick state
+Nikhil entering NikhilDefending state
+Beanz entering Attacking state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 8 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 passes the ball with force 2.63705  to player 7  Target is  308.873 302.249
+Player 7 enters receive state (Using Arrive)
+Player 8 enters wait state
+Player 8 enters support state
+Player 3 enters wait state
+Player 7 received request from 8 to make pass
+Player 7 cannot make requested pass <cannot kick ball>
+Player 7 received request from 8 to make pass
+Player 7 cannot make requested pass <cannot kick ball>
+Player 9 enters wait state
+Player 2 enters chase state
+Player 4 enters ReturnToHome state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 2 enters ReturnToHome state
+Player 4 enters chase state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 2 enters wait state
+Player 7 enters kick state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 4 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 7 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 7 enters dribble state
+Player 3 enters wait state
+Player 7 enters chase state
+Player 4 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 7 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 7 enters chase state
+Player 7 enters kick state
+Player 4 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 7 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 7 enters dribble state
+Player 7 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 3 enters support state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Goaly has ball / ball behind player
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 received request from 5 to make pass
+Player 4 Passed ball to requesting player
+Player 5 enters receive state (Using Pursuit)
+Player 4 enters wait state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 passes the ball with force 3  to player 1  Target is  50.7794 157.428
+Player 5 enters wait state
+Player 5 enters chase state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 7 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 7 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 4 enters receive state (Using Arrive)
+Player 7 enters chase state
+Player 8 enters wait state
+Player 9 enters wait state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 passes the ball with force 2.67302  to player 5  Target is  292.447 160.949
+Player 5 enters receive state (Using Arrive)
+Player 4 enters wait state
+Player 3 enters support state
+Player 2 enters wait state
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 passes the ball with force 2.93944  to player 2  Target is  337.904 268.27
+Player 2 enters receive state (Using Arrive)
+Player 5 enters wait state
+Player 10 enters wait state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 passes the ball with force 2.58957  to player 4  Target is  155.99 258.298
+Player 4 enters receive state (Using Arrive)
+Player 2 enters wait state
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 passes the ball with force 2.95563  to player 1  Target is  49.4337 197.026
+Player 4 enters wait state
+Player 4 enters chase state
+Player 4 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 9 enters wait state
+Player 10 enters wait state
+Player 5 enters receive state (Using Arrive)
+Player 7 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 9 enters wait state
+Player 10 enters wait state
+Player 5 enters receive state (Using Arrive)
+Player 7 enters chase state
+Player 8 enters wait state
+Player 2 enters wait state
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 4 enters wait state
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 3 enters wait state
+Player 5 received request from 3 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 received request from 2 to make pass
+Player 5 cannot make requested pass <cannot kick ball>
+Player 5 enters chase state
+Player 5 received request from 3 to make pass
+Player 5 Passed ball to requesting player
+Player 3 enters receive state (Using Arrive)
+Player 5 enters wait state
+Player 2 enters support state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 
+3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 7 enters ReturnToHome state
+Player 8 enters chase state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 8 enters ReturnToHome state
+Player 10 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 8 enters wait state
+Player 7 enters wait state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 10 enters kick state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 10 enters kick state
+Goaly has ball / ball behind player
+Player 10 enters chase state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 3 passes the ball with force 2.98009  to player 2  Target is  423.689 207.474
+Player 2 enters receive state (Using Arrive)
+Player 3 enters wait state
+Player 3 enters support state
+Player 8 enters chase state
+Player 10 enters ReturnToHome state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 passes the ball with force 2.63469  to player 4  Target is  264.434 237.391
+Player 4 enters receive state (Using Arrive)
+Player 2 enters wait state
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 10 enters wait state
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 received request from 5 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 passes the ball with force 2.86436  to player 1  Target is  58.9345 157.166
+Player 4 enters wait state
+Player 4 enters chase state
+Player 4 received request from 5 to make pass
+Player 4 Passed ball to requesting player
+Player 5 enters receive state (Using Pursuit)
+Player 4 enters wait state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 passes the ball with force 3  to player 2  Target is  416.757 237.997
+Player 2 enters receive state (Using Pursuit)
+Player 5 enters wait state
+Player 2 received request from 3 to make pass
+Player 2 cannot make requested pass <cannot kick ball>
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters kick state
+Player 2 enters dribble state
+Player 2 enters chase state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 enters chase state
+Player 2 enters kick state
+Player 8 enters kick state
+Beanz entering Defending state
+Player 3 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 7 enters support state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Goaly has ball / ball behind player
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 3 enters wait state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 2 enters ReturnToHome state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 
+5 enters ReturnToHome state
+Nikhil entering NikhilDefending state
+Beanz entering Attacking state
+Player 5 enters receive state (Using Pursuit)
+Player 8 enters chase state
+Player 4 enters wait state
+Player 10 enters wait state
+Player 5 enters chase state
+Player 5 enters kick state
+Player 5 passes the ball with force 2.9998  to player 2  Target is  248.375 230.008
+Player 2 enters receive state (Using Pursuit)
+Player 5 enters wait state
+Player 3 enters support state
+Player 2 received request from 4 to make pass
+Player 2 cannot make requested pass <cannot kick ball>
+Player 2 received request from 4 to make pass
+Player 2 cannot make requested pass <cannot kick ball>
+Player 2 received request from 4 to make pass
+Player 2 cannot make requested pass <cannot kick ball>
+Player 2 enters chase state
+Player 2 enters kick state
+Player 2 passes the ball with force 3  to player 1  Target is  44.8203 220.248
+Player 2 enters wait state
+Player 2 received request from 4 to make pass
+Player 2 Passed ball to requesting player
+Player 4 enters receive state (Using Arrive)
+Player 2 enters wait state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 9 enters wait state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 7 enters wait state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 received request from 3 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 received request from 3 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters chase state
+Player 4 received request from 3 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 7 enters chase state
+Player 8 enters ReturnToHome state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 received request from 3 to make pass
+Player 4 cannot make requested pass <cannot kick ball>
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 enters dribble state
+Player 4 enters chase state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters chase state
+Player 4 enters kick state
+Player 4 enters kick state
+Player 4 received request from 3 to make pass
+Player 4 Passed ball to requesting player
+Player 3 enters receive state (Using Pursuit)
+Player 4 enters wait state
+Player 2 enters support state
+Player 8 enters wait state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 7 enters ReturnToHome state
+Player 3 enters kick state
+Player 3 attempts a shot at  674 132
+Player 3 enters wait state
+Player 3 enters chase state
+Player 2 enters ReturnToHome state
+Player 3 enters ReturnToHome state
+Player 4 enters ReturnToHome state
+Player 5 enters ReturnToHome state
+Player 7 enters ReturnToHome state
+Player 8 enters ReturnToHome state
+Player 9 enters ReturnToHome state
+Player 10 enters ReturnToHome state
+Player 10 enters wait state
+Player 9 enters wait state
+Player 8 enters wait state
+Player 5 enters wait state
+Player 2 enters wait state
+Player 7 enters wait state
+Player 3 enters wait state
+Nikhil entering NikhilDefending state
+Beanz entering Defending state
+Player 4 enters wait state
+Player 3 enters chase state
+Player 10 enters chase state
+Player 3 enters kick state
+Beanz entering Attacking state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Player 3 enters dribble state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters kick state
+Goaly has ball / ball behind player
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 2 enters wait state
+Player 10 enters chase state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Player 10 enters chase state
+Player 10 enters kick state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 8 enters wait state
+Beanz entering Attacking state
+Player 3 enters chase state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 3 enters chase state
+Player 3 enters kick state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 8 enters support state
+Player 10 enters dribble state
+Player 10 enters chase state
+Player 2 enters wait state
+Player 3 enters kick state
+Nikhil entering NikhilDefending state
+Player 8 enters ReturnToHome state
+Beanz entering Attacking state
+Player 2 enters support state
+Player 3 enters dribble state
+Player 8 enters wait state
+Player 3 enters chase state
+Player 10 enters kick state
+Beanz entering Defending state
+Player 2 enters ReturnToHome state
+Nikhil entering NikhilAttacking state
+Player 10 passes the ball with force 2.52813  to player 8  Target is  464.914 137.498
+Player 8 enters receive state (Using Arrive)
+Player 10 enters wait state
+Player 7 enters support state
+Player 8 received request from 10 to make pass
+Player 8 cannot make requested pass <cannot kick ball>
+Player 2 enters wait state
+Player 2 enters chase state
+Player 3 enters ReturnToHome state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters chase state
+Player 8 enters kick state
+Player 8 enters kick state
+Player 8 enters dribble state
+Player 8 enters chase state
+Player 3 enters wait state
+Player 8 enters kick state
+Player 8 passes the ball with force 2.97433  to player 9  Target is  326.718 93.5855
+Player 9 enters receive state (Using Arrive)
+Player 8 enters wait state
+Player 9 enters chase state
+Player 9 enters kick state
+Player 9 enters dribble state
+Player 9 enters chase state
+Player 9 enters chase state
+Player 9 enters kick state
+Player 9 enters chase state
+Player 9 enters kick state
+Player 9 enters kick state
+Player 9 enters dribble state
+Player 9 enters chase state
+Player 9 enters kick state
+Player 9 enters dribble state
+Player 9 enters chase state
+Game Over
+Red: 1 (2.693834E-314) = 1.00 
+Blue: 0 (1.934119E-314) = 1.41
+
