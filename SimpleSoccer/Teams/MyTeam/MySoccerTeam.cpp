@@ -22,11 +22,11 @@ using std::vector;
 MySoccerTeam::MySoccerTeam(Goal*        home_goal,
                        Goal*        opponents_goal,
                        SoccerPitch* pitch,
-					   team_color   color): AbstSoccerTeam(home_goal, opponents_goal, pitch, team_color)
+					   team_color   color): AbstSoccerTeam(home_goal, opponents_goal, pitch, color)
 {
 	InitStateMachine();
 	CreatePlayers();
-	
+	RegisterPlayers();
 	InitPlayers();
 
   //create the sweet spot calculator
