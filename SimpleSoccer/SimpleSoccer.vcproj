@@ -993,6 +993,34 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="BlazersTeam"
+				>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersStates.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersTeam.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersTeam.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersTeamMaker.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersTeamMaker.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
