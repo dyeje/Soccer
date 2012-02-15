@@ -1020,6 +1020,22 @@
 					RelativePath=".\Teams\BlazersTeam\BlazersTeamMaker.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\FieldPlayerStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\FieldPlayerStates.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\GoalKeeperStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\GoalKeeperStates.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

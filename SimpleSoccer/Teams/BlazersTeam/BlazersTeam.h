@@ -57,6 +57,13 @@ public:
 	void prepareForKickoff();
 	
   void UpdateTargetsOfWaitingPlayers()const;
+
+  //returns true if player has a clean shot at the goal and sets ShotTarget
+  //to a normalized vector pointing in the direction the shot should be
+  //made. Else returns false and sets heading to a zero vector
+  virtual bool        CanShoot(Vector2D  BallPos,
+                       double     power, 
+                       Vector2D& ShotTarget = Vector2D())const;
 };
 
 #endif

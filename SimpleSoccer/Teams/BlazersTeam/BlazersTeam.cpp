@@ -6,7 +6,8 @@
 #include "../../FieldPlayer.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
-#include "../BucklandTeam/FieldPlayerStates.h"
+#include "FieldPlayerStates.h"
+#include "GoalKeeperStates.h"
 #include "../../ParamLoader.h"
 #include "2D/geometry.h"
 #include "Game/EntityManager.h"
@@ -77,20 +78,18 @@ void BlazersTeam::CreatePlayers()
   {
     
 	//create the players
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new GoalKeeper(this,
                                1,
-                               Wait::Instance(),
-							   GlobalPlayerState::Instance(),
+                               TendGoal::Instance(),
+							   GlobalKeeperState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale,
-                               PlayerBase::attacker));
+                               Prm.PlayerScale));
  
-    //create the players
     m_Players.push_back(new FieldPlayer(this,
                                6,
                                Wait::Instance(),
@@ -157,18 +156,17 @@ void BlazersTeam::CreatePlayers()
 
      
     //create the players
-	m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new GoalKeeper(this,
                                16,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               TendGoal::Instance(),
+							   GlobalKeeperState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale,
-                               PlayerBase::attacker));
+                               Prm.PlayerScale));
 
     m_Players.push_back(new FieldPlayer(this,
                                9,
@@ -255,4 +253,69 @@ void BlazersTeam::UpdateTargetsOfWaitingPlayers()const
     }
   }
 }
+
+
+
+//------------------------ CanShoot --------------------------------------
+//
+//  Given a ball position, a kicking power and a reference to a vector2D
+//  this function will sample random positions along the opponent's goal-
+//  mouth and check to see if a goal can be scored if the ball was to be
+//  kicked in that direction with the given power. If a possible shot is 
+//  found, the function will immediately return true, with the target 
+//  position stored in the vector ShotTarget.
+//------------------------------------------------------------------------
+bool BlazersTeam::CanShoot(Vector2D  BallPos,
+                          double     power, 
+                          Vector2D& ShotTarget)const
+{
+  //the number of randomly created shot targets this method will test 
+  int NumAttempts = Prm.NumAttemptsToFindValidStrike;
+
+  while (NumAttempts--)
+  {
+    //choose a random position along the opponent's goal mouth. (making
+    //sure the ball's radius is taken into account)
+    ShotTarget = OpponentsGoal()->Center();
+
+    //the y value of the shot position should lay somewhere between two
+    //goalposts (taking into consideration the ball diameter)
+    int MinYVal = OpponentsGoal()->LeftPost().y + Pitch()->Ball()->BRadius();
+    int MaxYVal = OpponentsGoal()->RightPost().y - Pitch()->Ball()->BRadius();
+
+	Vector2D goalyPos;
+	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
+
+	for (opp; opp != Opponents()->Members().end(); ++opp)
+	{
+		if ((*opp)->Role() == PlayerBase::goal_keeper)
+		{
+			goalyPos = (*opp)->Pos();
+		}
+	}
+
+	int target = max(fabs(MinYVal - goalyPos.x), fabs(MaxYVal - goalyPos.x));
+	ShotTarget.y = target;
+
+    //make sure striking the ball with the given power is enough to drive
+    //the ball over the goal line.
+    double time = Pitch()->Ball()->TimeToCoverDistance(BallPos,
+                                                      ShotTarget,
+                                                      power);
+    
+    //if it is, this shot is then tested to see if any of the opponents
+    //can intercept it.
+    if (time >= 0)
+    {
+      if (isPassSafeFromAllOpponents(BallPos, ShotTarget, NULL, power))
+      {
+        return true;
+      }
+    }
+  }
+  
+  return false;
+}
+
+
 
