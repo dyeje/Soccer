@@ -7,6 +7,7 @@
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
 #include "../BucklandTeam/FieldPlayerStates.h"
+#include "../BucklandTeam/GoalKeeperStates.h"
 #include "../../ParamLoader.h"
 #include "2D/geometry.h"
 #include "Game/EntityManager.h"
@@ -89,6 +90,18 @@ void MySoccerTeam::CreatePlayers()
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale,
                                PlayerBase::attacker));
+
+    m_Players.push_back(new GoalKeeper(this,
+                               1,
+                               TendGoal::Instance(),
+							   GlobalKeeperState::Instance(),
+                               Vector2D(0,-1),
+                               Vector2D(0.0, 0.0),
+                               Prm.PlayerMass,
+                               Prm.PlayerMaxForce,
+                               Prm.PlayerMaxSpeedWithoutBall,
+                               Prm.PlayerMaxTurnRate,
+                               Prm.PlayerScale));
  
     //create the players
     m_Players.push_back(new FieldPlayer(this,
@@ -155,21 +168,18 @@ void MySoccerTeam::CreatePlayers()
   else
   {
 
-     
     //create the players
-	m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new GoalKeeper(this,
                                16,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               TendGoal::Instance(),
+							   GlobalKeeperState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale,
-                               PlayerBase::attacker));
-
+                               Prm.PlayerScale));
     m_Players.push_back(new FieldPlayer(this,
                                9,
                                Wait::Instance(),
