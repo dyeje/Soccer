@@ -34,7 +34,7 @@ private:
     if(gameStateFile.fail()) { 
     }
     else {
-      while(gameStateFile >> player) {:w
+      while(gameStateFile >> player) {
 
         gameStateFile >> x;
         gameStateFile >> y;
