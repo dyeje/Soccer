@@ -216,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameStateLoader.cpp"
+				>
+			</File>
+			<File
 				RelativePath="main.cpp"
 				>
 				<FileConfiguration
@@ -355,6 +359,10 @@
 			</File>
 			<File
 				RelativePath="constants.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameStateLoader.h"
 				>
 			</File>
 			<File
@@ -799,11 +807,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Common\iniFileLoaderBase.h"
+				RelativePath="..\Common\misc\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Common\misc\iniFileLoaderBase.h"
+				RelativePath="..\Common\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
