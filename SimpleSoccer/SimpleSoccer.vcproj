@@ -807,11 +807,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Common\misc\iniFileLoaderBase.h"
+				RelativePath="..\Common\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Common\iniFileLoaderBase.h"
+				RelativePath="..\Common\misc\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
@@ -1004,6 +1004,22 @@
 			<Filter
 				Name="BlazersTeam"
 				>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersFieldPlayer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersFieldPlayer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersGoalkeeper.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersGoalkeeper.h"
+					>
+				</File>
 				<File
 					RelativePath=".\Teams\BlazersTeam\BlazersStates.cpp"
 					>

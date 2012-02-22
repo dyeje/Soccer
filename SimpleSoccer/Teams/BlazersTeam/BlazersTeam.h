@@ -28,15 +28,11 @@
                 
 class Goal;
 class PlayerBase;
-class FieldPlayer;
+class BlazersFieldPlayer;
+class BlazersGoalKeeper;
 class SoccerPitch;
-class GoalKeeper;
 class SupportSpotCalculator;
 
-
-
-
-                
 class BlazersTeam : public AbstSoccerTeam
 {
 

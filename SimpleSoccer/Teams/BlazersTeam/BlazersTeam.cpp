@@ -2,8 +2,10 @@
 #include "../../SoccerPitch.h"
 #include "../../Goal.h"
 #include "../../PlayerBase.h"
-#include "../../GoalKeeper.h"
-#include "../../FieldPlayer.h"
+// #include "../../Goalkeeper.h"
+#include "BlazersGoalkeeper.h"
+// #include "../../FieldPlayer.h"
+#include "BlazersFieldPlayer.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
 #include "FieldPlayerStates.h"
@@ -62,7 +64,13 @@ void BlazersTeam::InitPlayers()
 
   for (it; it != m_Players.end(); ++it)
   {
-    (*it)->Steering()->SeparationOn();   
+    (*it)->Steering()->SeparationOn();
+    
+    //cast to a field player
+    // BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
+    // if(plyr->HomeRegion()==9) {
+    //   plyr->ForcePosition(50,450);
+    // }
   }
 }
 
@@ -74,11 +82,10 @@ void BlazersTeam::InitPlayers()
 //------------------------------------------------------------------------
 void BlazersTeam::CreatePlayers()
 {
-  if (Color() == blue)
-  {
+  if (Color() == blue) {
     
-	//create the players
-    m_Players.push_back(new GoalKeeper(this,
+	  // Create Blue players
+    m_Players.push_back(new BlazersGoalKeeper(this,
                                1,
                                TendGoal::Instance(),
 							   GlobalKeeperState::Instance(),
@@ -90,7 +97,7 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale));
  
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new BlazersFieldPlayer(this,
                                6,
                                Wait::Instance(),
 							   GlobalPlayerState::Instance(),
@@ -105,7 +112,7 @@ void BlazersTeam::CreatePlayers()
 
 
 
-        m_Players.push_back(new FieldPlayer(this,
+        m_Players.push_back(new BlazersFieldPlayer(this,
                                8,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -122,7 +129,7 @@ void BlazersTeam::CreatePlayers()
  
 
 
-        m_Players.push_back(new FieldPlayer(this,
+        m_Players.push_back(new BlazersFieldPlayer(this,
                                3,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -136,7 +143,7 @@ void BlazersTeam::CreatePlayers()
                                PlayerBase::defender));
 
 
-        m_Players.push_back(new FieldPlayer(this,
+        m_Players.push_back(new BlazersFieldPlayer(this,
                                5,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -153,13 +160,11 @@ void BlazersTeam::CreatePlayers()
 
   else
   {
-
-     
-    //create the players
-    m_Players.push_back(new GoalKeeper(this,
+	  // Create Red players
+    m_Players.push_back(new BlazersGoalKeeper(this,
                                16,
                                TendGoal::Instance(),
-							   GlobalKeeperState::Instance(),
+                               GlobalKeeperState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -168,7 +173,7 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale));
 
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new BlazersFieldPlayer(this,
                                9,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -181,7 +186,7 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerScale,
                                PlayerBase::attacker));
 
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new BlazersFieldPlayer(this,
                                11,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -196,7 +201,7 @@ void BlazersTeam::CreatePlayers()
 
 
  
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new BlazersFieldPlayer(this,
                                12,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
@@ -210,7 +215,7 @@ void BlazersTeam::CreatePlayers()
                                PlayerBase::defender));
 
 
-    m_Players.push_back(new FieldPlayer(this,
+    m_Players.push_back(new BlazersFieldPlayer(this,
                                14,
                                Wait::Instance(),
                                GlobalPlayerState::Instance(),
