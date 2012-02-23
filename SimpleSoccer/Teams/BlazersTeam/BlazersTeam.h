@@ -60,6 +60,10 @@ public:
   virtual bool        CanShoot(Vector2D  BallPos,
                        double     power, 
                        Vector2D& ShotTarget = Vector2D())const;
+
+	int goalYMin;
+	int goalYMax;
+
 };
 
 #endif

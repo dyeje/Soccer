@@ -35,6 +35,9 @@ BlazersTeam::BlazersTeam(Goal*        home_goal,
   m_pSupportSpotCalc = new SupportSpotCalculator(Prm.NumSupportSpotsX,
                                                  Prm.NumSupportSpotsY,
                                                  this);
+
+  goalYMin = (pitch->cyClient()/2) - Prm.GoalWidth/2;
+  goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2;
 }
 
 
@@ -60,12 +63,14 @@ void BlazersTeam::InitPlayers()
 {
   //set default steering behaviors
   std::vector<PlayerBase*>::iterator it = m_Players.begin();
+  pair<double,double> coord;
 
   for (it; it != m_Players.end(); ++it)
   {
     (*it)->Steering()->SeparationOn();
     
-    // BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
+    BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
+    // coord = GameState.PlayerCoord("red_" + itoa(plyr->HomeRegion()));
     // if(plyr->HomeRegion()==9) {
     //   pair<double,double> coord = GameState.PlayerCoord("red_9");
     //   plyr->ForcePosition(coord.first,coord.second);
