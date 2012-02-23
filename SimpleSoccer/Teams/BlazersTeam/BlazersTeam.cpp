@@ -6,6 +6,7 @@
 #include "BlazersGoalkeeper.h"
 // #include "../../FieldPlayer.h"
 #include "BlazersFieldPlayer.h"
+#include "../../GameStateLoader.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
 #include "FieldPlayerStates.h"
@@ -66,11 +67,11 @@ void BlazersTeam::InitPlayers()
   {
     (*it)->Steering()->SeparationOn();
     
-    //cast to a field player
     // BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
     // if(plyr->HomeRegion()==9) {
-    //   plyr->ForcePosition(50,450);
-    // }
+    //   pair<double,double> coord = GameState.PlayerCoord("red_9");
+    //   plyr->ForcePosition(coord.first,coord.second);
+    }
   }
 }
 

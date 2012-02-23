@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <cassert>
 #include <map>
@@ -30,20 +31,26 @@ private:
   map<string, pair<double, double> > players;
 
   GameStateLoader() {   
+
     ifstream gameStateFile("GameState.ini");
-    if(gameStateFile.fail()) { 
-    }
-    else {
-      while(gameStateFile >> player) {
+    if(gameStateFile.is_open()) {
+      string line, token;
+      while(gameStateFile.good()) {
 
-        gameStateFile >> x;
-        gameStateFile >> y;
-        players[player] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
+        getline(gameStateFile,line);
+        if(!line.empty() && line[0]!='#') {
+          stringstream lineStream(line);
+          lineStream >> player;
+          lineStream >> x;
+          lineStream >> y;
+          players[player] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
+        }
       }
-
+      gameStateFile.close();
     }
+
   }
-  
+
 public:
 
   static GameStateLoader* Instance();
