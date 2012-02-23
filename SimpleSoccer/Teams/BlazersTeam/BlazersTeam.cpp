@@ -2,11 +2,9 @@
 #include "../../SoccerPitch.h"
 #include "../../Goal.h"
 #include "../../PlayerBase.h"
-// #include "../../Goalkeeper.h"
 #include "BlazersGoalkeeper.h"
-// #include "../../FieldPlayer.h"
 #include "BlazersFieldPlayer.h"
-#include "../../GameStateLoader.h"
+#include "GameStateLoader.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
 #include "FieldPlayerStates.h"
@@ -71,7 +69,7 @@ void BlazersTeam::InitPlayers()
     // if(plyr->HomeRegion()==9) {
     //   pair<double,double> coord = GameState.PlayerCoord("red_9");
     //   plyr->ForcePosition(coord.first,coord.second);
-    }
+    // }
   }
 }
 
