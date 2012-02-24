@@ -1,8 +1,9 @@
 # Player    X     Y
 # Home Reg  Coord Coord
 
-# Note: Currently, only red players can be set
-# Field ix 694, 352
+# Note: 1) Currently, only red players and the ball can be set
+#       2) 0 is the Ball, not a player
+#       3) Field x,y = 694, 352
 
 # Default
 # 16      74    176  # Goal Tender
@@ -12,4 +13,5 @@
 # 14      183.5 72
 
 # CanShoot
+0       560    176
 9       554    176

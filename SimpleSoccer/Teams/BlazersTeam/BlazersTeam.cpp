@@ -68,10 +68,16 @@ void BlazersTeam::InitPlayers()
   {
     (*it)->Steering()->SeparationOn();
     
+    // Get/Set Red Player positions, if players are specified in state file
     BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
     coord = GameState.PlayerCoord(plyr->HomeRegion());
     if(coord.first != 0 && coord.second != 0)
       plyr->ForcePosition(coord.first,coord.second);
+
+    // Get/Set Ball position, if specified in state file
+    coord = GameState.PlayerCoord(0);
+    if(coord.first != 0 && coord.second != 0)
+      Pitch()->Ball()->PlaceAtPosition(Vector2D(coord.first,coord.second));
   }
 }
 
