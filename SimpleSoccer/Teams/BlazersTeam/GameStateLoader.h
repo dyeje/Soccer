@@ -25,10 +25,9 @@ class GameStateLoader {
 
 private:
 
-  string player;
-  string x;
-  string y;
-  map<int, pair<double, double> > players;
+  string player, x, y, state;
+  map<int, pair<double, double> > player_coords;
+  map<int, string> player_states;
 
   GameStateLoader() {   
 
@@ -43,7 +42,9 @@ private:
           lineStream >> player;
           lineStream >> x;
           lineStream >> y;
-          players[atoi(player.c_str())] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
+          lineStream >> state;
+          player_coords[atoi(player.c_str())] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
+          player_states[atoi(player.c_str())] = state;
         }
       }
       gameStateFile.close();
@@ -55,7 +56,10 @@ public:
 
   static GameStateLoader* Instance();
   pair<double, double> PlayerCoord(int player) { 
-    return players[player];
+    return player_coords[player];
+  }
+  string PlayerState(int player) { 
+    return player_states[player];
   }
 
 };

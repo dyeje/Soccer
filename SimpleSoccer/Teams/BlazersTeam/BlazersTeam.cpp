@@ -63,6 +63,7 @@ void BlazersTeam::InitPlayers()
   //set default steering behaviors
   std::vector<PlayerBase*>::iterator it = m_Players.begin();
   pair<double,double> coord;
+  string state;
 
   for (it; it != m_Players.end(); ++it)
   {
@@ -71,8 +72,41 @@ void BlazersTeam::InitPlayers()
     // Get/Set Red Player positions, if players are specified in state file
     BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
     coord = GameState.PlayerCoord(plyr->HomeRegion());
-    if(coord.first != 0 && coord.second != 0)
+    if(coord.first != 0 && coord.second != 0) {
       plyr->ForcePosition(coord.first,coord.second);
+      state = GameState.PlayerState(plyr->HomeRegion());
+      if(state=="ChaseBall")
+          plyr->GetFSM()->ChangeState(ChaseBall::Instance());
+      else if(state=="SupportAttacker")
+          plyr->GetFSM()->ChangeState(SupportAttacker::Instance());
+      else if(state=="KickBall")
+          plyr->GetFSM()->ChangeState(KickBall::Instance());
+      else if(state=="Dribble")
+         plyr->GetFSM()->ChangeState(Dribble::Instance());
+      else if(state=="ReceiveBall")
+          plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
+      else if(state=="Wait")
+          plyr->GetFSM()->ChangeState(Wait::Instance());
+
+      // Cant use switch on strings in C++.  need to convert to enum then switch
+      // on it's int value.....
+      // if(!state.empty()) {
+      //   switch(state) {
+      //     case "ChaseBall":
+      //       plyr->GetFSM()->ChangeState(ChaseBall::Instance());
+      //     case 'SupportAttacker':
+      //       plyr->GetFSM()->ChangeState(SupportAttacker::Instance());
+      //     case 'KickBall':
+      //       plyr->GetFSM()->ChangeState(KickBall::Instance());
+      //     case 'Dribble':
+      //       plyr->GetFSM()->ChangeState(Dribble::Instance());
+      //     case 'ReceiveBall':
+      //       plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
+      //     default:
+      //       plyr->GetFSM()->ChangeState(Wait::Instance());
+      //   }
+      // }
+    }
 
     // Get/Set Ball position, if specified in state file
     coord = GameState.PlayerCoord(0);

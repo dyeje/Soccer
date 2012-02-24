@@ -1,4 +1,4 @@
-# Player    X     Y
+# Player    X     Y       State (opional)
 # Home Reg  Coord Coord
 
 # Note: 1) Currently, only red players and the ball can be set
@@ -13,5 +13,5 @@
 # 14      183.5 72
 
 # CanShoot
-0       560    176
-9       554    176
+0       560    176  
+9       534    176  ChaseBall
