@@ -85,27 +85,8 @@ void TendGoal::Enter(GoalKeeper* keeper)
 
 void TendGoal::Execute(GoalKeeper* keeper)
 {
-	target = max(fabs(goalYMin - goalyPos.x), fabs(goalYMax - goalyPos.x));
-	//ShotTarget.y = target;
-
- //   //make sure striking the ball with the given power is enough to drive
- //   //the ball over the goal line.
- //   double time = Pitch()->Ball()->TimeToCoverDistance(BallPos,
- //                                                     ShotTarget,
- //                                                     power);
-    
-  //  //if it is, this shot is then tested to see if any of the opponents
-  //  //can intercept it.
-  //  if (time >= 0)
-  //  {
-  //    if (isPassSafeFromAllOpponents(BallPos, ShotTarget, NULL, power))
-  //    {
-  //      return true;
-  //    }
-  //  }
-  //}
 	//the rear interpose target will change as the ball's position changes
-    //so it must be updated each update-step 
+  //so it must be updated each update-step 
 	keeper->Steering()->SetTarget(keeper->GetRearInterposeTarget());
 
   //if the ball comes in range the keeper traps it and then changes state
