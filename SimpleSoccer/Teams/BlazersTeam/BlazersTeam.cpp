@@ -20,7 +20,6 @@
 
 using std::vector;
 
-
 BlazersTeam::BlazersTeam(Goal*        home_goal,
                        Goal*        opponents_goal,
                        SoccerPitch* pitch,
@@ -70,11 +69,9 @@ void BlazersTeam::InitPlayers()
     (*it)->Steering()->SeparationOn();
     
     BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(*it);
-    // coord = GameState.PlayerCoord("red_" + itoa(plyr->HomeRegion()));
-    // if(plyr->HomeRegion()==9) {
-    //   pair<double,double> coord = GameState.PlayerCoord("red_9");
-    //   plyr->ForcePosition(coord.first,coord.second);
-    // }
+    coord = GameState.PlayerCoord(plyr->HomeRegion());
+    if(coord.first != 0 && coord.second != 0)
+      plyr->ForcePosition(coord.first,coord.second);
   }
 }
 

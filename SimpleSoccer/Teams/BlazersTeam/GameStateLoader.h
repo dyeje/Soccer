@@ -28,11 +28,11 @@ private:
   string player;
   string x;
   string y;
-  map<string, pair<double, double> > players;
+  map<int, pair<double, double> > players;
 
   GameStateLoader() {   
 
-    ifstream gameStateFile("GameState.ini");
+    ifstream gameStateFile("GameState.txt");
     if(gameStateFile.is_open()) {
       string line, token;
       while(gameStateFile.good()) {
@@ -43,7 +43,7 @@ private:
           lineStream >> player;
           lineStream >> x;
           lineStream >> y;
-          players[player] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
+          players[atoi(player.c_str())] = make_pair<double, double> (atof(x.c_str()), atof(y.c_str()));
         }
       }
       gameStateFile.close();
@@ -54,7 +54,7 @@ private:
 public:
 
   static GameStateLoader* Instance();
-  pair<double, double> PlayerCoord(const string player) { 
+  pair<double, double> PlayerCoord(int player) { 
     return players[player];
   }
 
