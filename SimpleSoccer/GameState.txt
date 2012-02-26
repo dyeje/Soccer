@@ -14,4 +14,4 @@
 
 # CanShoot
 0       560    176  
-9       534    176  ChaseBall
+9       534    156  ChaseBall

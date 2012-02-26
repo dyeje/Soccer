@@ -88,34 +88,15 @@ void BlazersTeam::InitPlayers()
       else if(state=="Wait")
           plyr->GetFSM()->ChangeState(Wait::Instance());
 
-      // Cant use switch on strings in C++.  need to convert to enum then switch
-      // on it's int value.....
-      // if(!state.empty()) {
-      //   switch(state) {
-      //     case "ChaseBall":
-      //       plyr->GetFSM()->ChangeState(ChaseBall::Instance());
-      //     case 'SupportAttacker':
-      //       plyr->GetFSM()->ChangeState(SupportAttacker::Instance());
-      //     case 'KickBall':
-      //       plyr->GetFSM()->ChangeState(KickBall::Instance());
-      //     case 'Dribble':
-      //       plyr->GetFSM()->ChangeState(Dribble::Instance());
-      //     case 'ReceiveBall':
-      //       plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
-      //     default:
-      //       plyr->GetFSM()->ChangeState(Wait::Instance());
-      //   }
-      // }
     }
-
-    // Get/Set Ball position, if specified in state file
-    coord = GameState.PlayerCoord(0);
-    if(coord.first != 0 && coord.second != 0)
-      Pitch()->Ball()->PlaceAtPosition(Vector2D(coord.first,coord.second));
   }
-}
 
+  // Get/Set Ball position, if specified in state file
+  coord = GameState.PlayerCoord(0);
+  if(coord.first != 0 && coord.second != 0)
+    Pitch()->Ball()->PlaceAtPosition(Vector2D(coord.first,coord.second));
 
+ }
 
 //------------------------- CreatePlayers --------------------------------
 //
