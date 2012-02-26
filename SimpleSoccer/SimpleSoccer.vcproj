@@ -1061,6 +1061,74 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="PriorTeam"
+				>
+				<File
+					RelativePath=".\Teams\PriorTeam\FieldPlayerStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\FieldPlayerStates.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\GameStateLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\GameStateLoader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\GoalKeeperStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\GoalKeeperStates.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__FieldPlayer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__FieldPlayer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__Goalkeeper.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__Goalkeeper.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__States.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__States.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__Team.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__Team.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__TeamMaker.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__TeamMaker.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
