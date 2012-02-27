@@ -1,3 +1,7 @@
+' http://www.motobit.com/tips/detpg_replfile  
+' Title="This script let's you replace string in a text file using
+' VBS and FSO. 
+
 Dim FileName, Find, ReplaceWith, FileContents, dFileContents
 Find         = WScript.Arguments(0)
 ReplaceWith  = WScript.Arguments(1)

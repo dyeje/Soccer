@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <time.h>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 #include "constants.h"
 #include "misc/utils.h"
@@ -24,6 +26,7 @@ char* g_szApplicationName = "Simple Soccer";
 char*	g_szWindowClassName = "MyWindowClass";
 
 SoccerPitch* g_SoccerPitch;
+
 
 //create a timer
 PrecisionTimer timer(Prm.FrameRate);
@@ -370,9 +373,15 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
   MSG msg;
 
+  // Is this a tournament (repeat games, no pause in UI after each game, games recorded)
+  bool isTourney = false;
+  char* buf = (char *) new char[strlen(szCmdLine)];
+  strcpy(buf,szCmdLine);
+  if(buf[0]=='t')
+    isTourney = true;
+
   //enter the message loop
   bool bDone = false;
-
   while(!bDone)
   {
 					
@@ -399,7 +408,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
       //render 
       RedrawWindow(hWnd, true);
 
-      Sleep(2);
+      if(!isTourney)
+        Sleep(2);
     }
    	if (g_SoccerPitch->IsTimeUp(Prm.GameTime)) 
 		bDone = true;
@@ -437,7 +447,20 @@ int WINAPI WinMain (HINSTANCE hInstance,
   //sprintf(buff, "Game Over\nRed: %i = %2.2f \nBlue: %i = %2.2f", 
 	//		redScore, redAdjScore, blueScore, blueAdjScore);  
   debug_con << buff << "\n";
-  MessageBox(NULL, buff, "Final Result", 0);
+
+  // Append score to file if in tourney
+  if(isTourney) {
+     std::ofstream outfile;
+     outfile.open("games.txt",std::ios_base::app);
+     sprintf(buff, "\nRed: %i (%2.3f) = %2.2f, Blue: %i (%2.3f) = %2.2f", 
+		  	redScore, fRedTime, redAdjScore, blueScore, fBlueTime, blueAdjScore);
+     outfile << buff;
+     outfile.close();
+  }
+  else {
+    MessageBox(NULL, buff, "Final Result", 0);
+  }
+
   delete g_SoccerPitch;
 
   UnregisterClass( g_szWindowClassName, winclass.hInstance );
