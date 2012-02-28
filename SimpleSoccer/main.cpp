@@ -179,7 +179,14 @@ LRESULT CALLBACK WindowProc (HWND   hwnd,
 
             break;
             
-        }//end switch
+           case IDM_START_OVER:
+
+            // Prm.bHighlightIfThreatened = !Prm.bHighlightIfThreatened; 
+
+            CheckAllMenuItemsAppropriately(hwnd);
+
+            break;
+         }//end switch
       }
 
       break;

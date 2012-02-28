@@ -11,6 +11,7 @@
 #define ID_AIDS_SHOWTARGETS             40006
 #define ID_AIDS_NOAIDS                  40007
 #define IDM_AIDS_HIGHLITE               40008
+#define IDM_START_OVER                  40009
 
 // Next default values for new objects
 // 

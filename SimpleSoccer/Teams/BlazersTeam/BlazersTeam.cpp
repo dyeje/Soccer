@@ -321,7 +321,8 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
 		}
 	}
 
-	int target = max(fabs(MinYVal - goalyPos.x), fabs(MaxYVal - goalyPos.x));
+	int target; 
+	(fabs(MinYVal - goalyPos.y) > fabs(MaxYVal - goalyPos.y)) ? target = MinYVal+2 : target = MaxYVal-2;
 	ShotTarget.y = target;
 
     //make sure striking the ball with the given power is enough to drive
