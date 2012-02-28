@@ -35,8 +35,9 @@ BlazersTeam::BlazersTeam(Goal*        home_goal,
                                                  Prm.NumSupportSpotsY,
                                                  this);
 
-  goalYMin = (pitch->cyClient()/2) - Prm.GoalWidth/2;
-  goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2;
+  ballRadius = Pitch()->Ball()->BRadius();
+  goalYMin = ((pitch->cyClient()/2) - Prm.GoalWidth/2) + ballRadius;
+  goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2 - ballRadius;
 }
 
 
@@ -296,7 +297,19 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
                           double     power, 
                           Vector2D& ShotTarget)const
 {
-  //the number of randomly created shot targets this method will test 
+	//if(true) {
+	//	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
+	//	for (opp; opp != Opponents()->Members().end(); ++opp)
+	//	{
+	//		if ((*opp)->Role() == PlayerBase::goal_keeper)
+	//		{
+	//		    //opponentGoaly = static_cast<BlazersGoalKeeper*>(*opp);
+	//		    opponentGoaly = opp;
+	//		}
+	//	}
+	//}
+	
+	//the number of randomly created shot targets this method will test 
   int NumAttempts = Prm.NumAttemptsToFindValidStrike;
 
   while (NumAttempts--)
@@ -304,11 +317,6 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
     //choose a random position along the opponent's goal mouth. (making
     //sure the ball's radius is taken into account)
     ShotTarget = OpponentsGoal()->Center();
-
-    //the y value of the shot position should lay somewhere between two
-    //goalposts (taking into consideration the ball diameter)
-    int MinYVal = OpponentsGoal()->LeftPost().y + Pitch()->Ball()->BRadius();
-    int MaxYVal = OpponentsGoal()->RightPost().y - Pitch()->Ball()->BRadius();
 
 	Vector2D goalyPos;
 	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
@@ -322,7 +330,7 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
 	}
 
 	int target; 
-	(fabs(MinYVal - goalyPos.y) > fabs(MaxYVal - goalyPos.y)) ? target = MinYVal+2 : target = MaxYVal-2;
+	(fabs(goalYMin - goalyPos.y) > fabs(goalYMax - goalyPos.y)) ? target = goalYMin+2 : target = goalYMax-2;
 	ShotTarget.y = target;
 
     //make sure striking the ball with the given power is enough to drive

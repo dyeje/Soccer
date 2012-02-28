@@ -61,8 +61,12 @@ public:
                        double     power, 
                        Vector2D& ShotTarget = Vector2D())const;
 
-	int goalYMin;
-	int goalYMax;
+	double goalYMin;
+	double goalYMax;
+	double ballRadius;
+	//BlazersGoalKeeper* opponentGoaly;
+	//std::vector<PlayerBase*>::const_iterator opponentGoaly;
+	//PlayerBase* opponentGoaly;
 
 };
 
