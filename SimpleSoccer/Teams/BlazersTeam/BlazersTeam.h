@@ -64,9 +64,7 @@ public:
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
-	//BlazersGoalKeeper* opponentGoaly;
-	//std::vector<PlayerBase*>::const_iterator opponentGoaly;
-	//PlayerBase* opponentGoaly;
+	//PlayerBase* goalie;
 
 };
 

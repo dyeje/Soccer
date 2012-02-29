@@ -297,41 +297,30 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
                           double     power, 
                           Vector2D& ShotTarget)const
 {
-	//if(true) {
-	//	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
-	//	for (opp; opp != Opponents()->Members().end(); ++opp)
-	//	{
-	//		if ((*opp)->Role() == PlayerBase::goal_keeper)
-	//		{
-	//		    //opponentGoaly = static_cast<BlazersGoalKeeper*>(*opp);
-	//		    opponentGoaly = opp;
-	//		}
-	//	}
-	//}
-	
-	//the number of randomly created shot targets this method will test 
-  int NumAttempts = Prm.NumAttemptsToFindValidStrike;
-
-  while (NumAttempts--)
-  {
-    //choose a random position along the opponent's goal mouth. (making
-    //sure the ball's radius is taken into account)
-    ShotTarget = OpponentsGoal()->Center();
-
-	Vector2D goalyPos;
+  PlayerBase* goalie;   
 	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
 
 	for (opp; opp != Opponents()->Members().end(); ++opp)
 	{
 		if ((*opp)->Role() == PlayerBase::goal_keeper)
 		{
-			goalyPos = (*opp)->Pos();
+			goalie = (*opp);
 		}
 	}
 
-	int target; 
-	(fabs(goalYMin - goalyPos.y) > fabs(goalYMax - goalyPos.y)) ? target = goalYMin+2 : target = goalYMax-2;
-	ShotTarget.y = target;
+	//the number of randomly created shot targets this method will test 
+	//int NumAttempts = Prm.NumAttemptsToFindValidStrike;
+
+  //while (NumAttempts--)
+  //{
+    //choose a random position along the opponent's goal mouth. (making
+    //sure the ball's radius is taken into account)
+    //ShotTarget = OpponentsGoal()->Center();
+    ShotTarget.x = OpponentsGoal()->Center().x;
+
+    int target; 
+    (fabs(goalYMin - goalie->Pos().y) > fabs(goalYMax - goalie->Pos().y)) ? target = goalYMin+2 : target = goalYMax-2;
+    ShotTarget.y = target;
 
     //make sure striking the ball with the given power is enough to drive
     //the ball over the goal line.
@@ -348,7 +337,7 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
         return true;
       }
     }
-  }
+  //}
   
   return false;
 }
