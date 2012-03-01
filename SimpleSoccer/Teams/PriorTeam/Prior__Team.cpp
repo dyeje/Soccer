@@ -35,8 +35,9 @@ Prior__Team::Prior__Team(Goal*        home_goal,
                                                  Prm.NumSupportSpotsY,
                                                  this);
 
-  goalYMin = (pitch->cyClient()/2) - Prm.GoalWidth/2;
-  goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2;
+  ballRadius = Pitch()->Ball()->BRadius();
+  goalYMin = ((pitch->cyClient()/2) - Prm.GoalWidth/2) + ballRadius;
+  goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2 - ballRadius;
 }
 
 
@@ -296,33 +297,30 @@ bool Prior__Team::CanShoot(Vector2D  BallPos,
                           double     power, 
                           Vector2D& ShotTarget)const
 {
-  //the number of randomly created shot targets this method will test 
-  int NumAttempts = Prm.NumAttemptsToFindValidStrike;
-
-  while (NumAttempts--)
-  {
-    //choose a random position along the opponent's goal mouth. (making
-    //sure the ball's radius is taken into account)
-    ShotTarget = OpponentsGoal()->Center();
-
-    //the y value of the shot position should lay somewhere between two
-    //goalposts (taking into consideration the ball diameter)
-    int MinYVal = OpponentsGoal()->LeftPost().y + Pitch()->Ball()->BRadius();
-    int MaxYVal = OpponentsGoal()->RightPost().y - Pitch()->Ball()->BRadius();
-
-	Vector2D goalyPos;
+  PlayerBase* goalie;   
 	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
 
 	for (opp; opp != Opponents()->Members().end(); ++opp)
 	{
 		if ((*opp)->Role() == PlayerBase::goal_keeper)
 		{
-			goalyPos = (*opp)->Pos();
+			goalie = (*opp);
 		}
 	}
 
-	int target = max(fabs(MinYVal - goalyPos.x), fabs(MaxYVal - goalyPos.x));
-	ShotTarget.y = target;
+	//the number of randomly created shot targets this method will test 
+	//int NumAttempts = Prm.NumAttemptsToFindValidStrike;
+
+  //while (NumAttempts--)
+  //{
+    //choose a random position along the opponent's goal mouth. (making
+    //sure the ball's radius is taken into account)
+    //ShotTarget = OpponentsGoal()->Center();
+    ShotTarget.x = OpponentsGoal()->Center().x;
+
+    int target; 
+    (fabs(goalYMin - goalie->Pos().y) > fabs(goalYMax - goalie->Pos().y)) ? target = goalYMin+2 : target = goalYMax-2;
+    ShotTarget.y = target;
 
     //make sure striking the ball with the given power is enough to drive
     //the ball over the goal line.
@@ -339,7 +337,7 @@ bool Prior__Team::CanShoot(Vector2D  BallPos,
         return true;
       }
     }
-  }
+  //}
   
   return false;
 }

@@ -61,8 +61,10 @@ public:
                        double     power, 
                        Vector2D& ShotTarget = Vector2D())const;
 
-	int goalYMin;
-	int goalYMax;
+	double goalYMin;
+	double goalYMax;
+	double ballRadius;
+	//PlayerBase* goalie;
 
 };
 
