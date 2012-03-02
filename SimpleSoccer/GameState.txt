@@ -18,9 +18,16 @@
 # 8       401.5 72
 # 3       510.5 280
 # 5       510.5 72
+# Default Team States
+#RedTeam     Defending
+#BlueTeam    Defending
 
-# CanShoot
+RedTeam     Attacking
+BlueTeam    Defending
+
+# CanShoot Test 1 & 2
 #0       570    176  
-#9       514    156  
-#1       619.5 146  # Goal Tender
+#9       544    156  ChaseBall
+#1       659    140  TendGoal    # Test1, goal at top
+#1       659    210  TendGoal   # Test2, goal at bottom
 

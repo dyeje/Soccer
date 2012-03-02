@@ -88,7 +88,10 @@ void BlazersTeam::InitPlayers()
           plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
       else if(state=="Wait")
           plyr->GetFSM()->ChangeState(Wait::Instance());
-
+      else if(state=="TendGoal") {
+          BlazersGoalKeeper* plyr_g = static_cast<BlazersGoalKeeper*>(*it);
+          plyr_g->GetFSM()->ChangeState(TendGoal::Instance());
+      }
     }
   }
 
@@ -96,6 +99,17 @@ void BlazersTeam::InitPlayers()
   coord = GameState.PlayerCoord(0);
   if(coord.first != 0 && coord.second != 0)
     Pitch()->Ball()->PlaceAtPosition(Vector2D(coord.first,coord.second));
+
+  // Get/Set team state, if specified in state file
+  state = GameState.TeamState(Color());
+  if(state=="Attacking") {
+    m_pStateMachine->SetCurrentState(BlazersAttacking::Instance());
+    m_pStateMachine->SetPreviousState(BlazersAttacking::Instance());
+  }
+  else if(state=="Defending") {
+    m_pStateMachine->SetCurrentState(BlazersDefending::Instance());
+    m_pStateMachine->SetPreviousState(BlazersDefending::Instance());
+  }
 
  }
 
