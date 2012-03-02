@@ -799,11 +799,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Common\misc\iniFileLoaderBase.h"
+				RelativePath="..\Common\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Common\iniFileLoaderBase.h"
+				RelativePath="..\Common\misc\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
@@ -1005,11 +1005,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersFieldPlayerStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersFieldPlayerStates.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Teams\BlazersTeam\BlazersGoalkeeper.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Teams\BlazersTeam\BlazersGoalkeeper.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersGoalKeeperStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersGoalKeeperStates.h"
 					>
 				</File>
 				<File
@@ -1037,14 +1053,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Teams\BlazersTeam\FieldPlayerStates.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Teams\BlazersTeam\FieldPlayerStates.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Teams\BlazersTeam\GameStateLoader.cpp"
 					>
 				</File>
@@ -1052,40 +1060,16 @@
 					RelativePath=".\Teams\BlazersTeam\GameStateLoader.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Teams\BlazersTeam\GoalKeeperStates.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Teams\BlazersTeam\GoalKeeperStates.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="PriorTeam"
 				>
-				<File
-					RelativePath=".\Teams\PriorTeam\FieldPlayerStates.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Teams\PriorTeam\FieldPlayerStates.h"
-					>
-				</File>
 				<File
 					RelativePath=".\Teams\PriorTeam\GameStateLoader.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Teams\PriorTeam\GameStateLoader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Teams\PriorTeam\GoalKeeperStates.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Teams\PriorTeam\GoalKeeperStates.h"
 					>
 				</File>
 				<File
@@ -1097,11 +1081,27 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Teams\PriorTeam\Prior__FieldPlayerStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__FieldPlayerStates.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Teams\PriorTeam\Prior__Goalkeeper.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Teams\PriorTeam\Prior__Goalkeeper.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__GoalKeeperStates.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__GoalKeeperStates.h"
 					>
 				</File>
 				<File

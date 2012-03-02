@@ -2,7 +2,7 @@
 #define FIELDPLAYERSTATES_H
 //------------------------------------------------------------------------
 //
-//  Name: FieldPlayerStates.h
+//  Name: Prior__FieldPlayerStates.h
 //
 //  Desc: States for the field players of Simple Soccer. See my book
 //        for detailed descriptions
@@ -23,16 +23,16 @@ class SoccerPitch;
 
 
 //------------------------------------------------------------------------
-class GlobalPlayerState : public State<FieldPlayer>
+class Prior__GlobalPlayerState : public State<FieldPlayer>
 {
 private:
   
-  GlobalPlayerState(){}
+  Prior__GlobalPlayerState(){}
 
 public:
 
   //this is a singleton
-  static GlobalPlayerState* Instance();
+  static Prior__GlobalPlayerState* Instance();
 
   void Enter(FieldPlayer* player){}
 
@@ -44,16 +44,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ChaseBall : public State<FieldPlayer>
+class Prior__ChaseBall : public State<FieldPlayer>
 {
 private:
   
-  ChaseBall(){}
+  Prior__ChaseBall(){}
 
 public:
 
   //this is a singleton
-  static ChaseBall* Instance();
+  static Prior__ChaseBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -65,16 +65,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class Dribble : public State<FieldPlayer>
+class Prior__Dribble : public State<FieldPlayer>
 {
 private:
   
-  Dribble(){}
+  Prior__Dribble(){}
 
 public:
 
   //this is a singleton
-  static Dribble* Instance();
+  static Prior__Dribble* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -87,16 +87,16 @@ public:
 
 
 //------------------------------------------------------------------------
-class ReturnToHomeRegion: public State<FieldPlayer>
+class Prior__ReturnToHomeRegion: public State<FieldPlayer>
 {
 private:
   
-  ReturnToHomeRegion(){}
+  Prior__ReturnToHomeRegion(){}
 
 public:
 
   //this is a singleton
-  static ReturnToHomeRegion* Instance();
+  static Prior__ReturnToHomeRegion* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -108,16 +108,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class Wait: public State<FieldPlayer>
+class Prior__Wait: public State<FieldPlayer>
 {
 private:
   
-  Wait(){}
+  Prior__Wait(){}
 
 public:
 
   //this is a singleton
-  static Wait* Instance();
+  static Prior__Wait* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -129,16 +129,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class KickBall: public State<FieldPlayer>
+class Prior__KickBall: public State<FieldPlayer>
 {
 private:
   
-  KickBall(){}
+  Prior__KickBall(){}
 
 public:
 
   //this is a singleton
-  static KickBall* Instance();
+  static Prior__KickBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -150,16 +150,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ReceiveBall: public State<FieldPlayer>
+class Prior__ReceiveBall: public State<FieldPlayer>
 {
 private:
   
-  ReceiveBall(){}
+  Prior__ReceiveBall(){}
 
 public:
 
   //this is a singleton
-  static ReceiveBall* Instance();
+  static Prior__ReceiveBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -172,16 +172,16 @@ public:
 
 
 //------------------------------------------------------------------------
-class SupportAttacker: public State<FieldPlayer>
+class Prior__SupportAttacker: public State<FieldPlayer>
 {
 private:
   
-  SupportAttacker(){}
+  Prior__SupportAttacker(){}
 
 public:
 
   //this is a singleton
-  static SupportAttacker* Instance();
+  static Prior__SupportAttacker* Instance();
 
   void Enter(FieldPlayer* player);
 

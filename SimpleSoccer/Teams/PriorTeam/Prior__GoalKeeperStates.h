@@ -20,16 +20,16 @@ class GoalKeeper;
 class SoccerPitch;
 
 
-class GlobalKeeperState: public State<GoalKeeper>
+class Prior__GlobalKeeperState: public State<GoalKeeper>
 {
 private:
   
-  GlobalKeeperState(){}
+  Prior__GlobalKeeperState(){}
 
 public:
 
   //this is a singleton
-  static GlobalKeeperState* Instance();
+  static Prior__GlobalKeeperState* Instance();
 
   void Enter(GoalKeeper* keeper){}
 
@@ -42,16 +42,16 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class TendGoal: public State<GoalKeeper>
+class Prior__TendGoal: public State<GoalKeeper>
 {
 private:
   
-  TendGoal(){}
+  Prior__TendGoal(){}
 
 public:
 
   //this is a singleton
-  static TendGoal* Instance();
+  static Prior__TendGoal* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -63,16 +63,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class InterceptBall: public State<GoalKeeper>
+class Prior__InterceptBall: public State<GoalKeeper>
 {
 private:
   
-  InterceptBall(){}
+  Prior__InterceptBall(){}
 
 public:
 
   //this is a singleton
-  static InterceptBall* Instance();
+  static Prior__InterceptBall* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -84,16 +84,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ReturnHome: public State<GoalKeeper>
+class Prior__ReturnHome: public State<GoalKeeper>
 {
 private:
   
-  ReturnHome(){}
+  Prior__ReturnHome(){}
 
 public:
 
   //this is a singleton
-  static ReturnHome* Instance();
+  static Prior__ReturnHome* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -105,16 +105,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class PutBallBackInPlay: public State<GoalKeeper>
+class Prior__PutBallBackInPlay: public State<GoalKeeper>
 {
 private:
   
-  PutBallBackInPlay(){}
+  Prior__PutBallBackInPlay(){}
 
 public:
 
   //this is a singleton
-  static PutBallBackInPlay* Instance();
+  static Prior__PutBallBackInPlay* Instance();
 
   void Enter(GoalKeeper* keeper);
 

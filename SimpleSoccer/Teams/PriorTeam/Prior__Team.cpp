@@ -7,8 +7,8 @@
 #include "GameStateLoader.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
-#include "FieldPlayerStates.h"
-#include "GoalKeeperStates.h"
+#include "Prior__FieldPlayerStates.h"
+#include "Prior__GoalKeeperStates.h"
 #include "../../ParamLoader.h"
 #include "2D/geometry.h"
 #include "Game/EntityManager.h"
@@ -77,18 +77,21 @@ void Prior__Team::InitPlayers()
       plyr->ForcePosition(coord.first,coord.second);
       state = GameState.PlayerState(plyr->HomeRegion());
       if(state=="ChaseBall")
-          plyr->GetFSM()->ChangeState(ChaseBall::Instance());
+          plyr->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
       else if(state=="SupportAttacker")
-          plyr->GetFSM()->ChangeState(SupportAttacker::Instance());
+          plyr->GetFSM()->ChangeState(Prior__SupportAttacker::Instance());
       else if(state=="KickBall")
-          plyr->GetFSM()->ChangeState(KickBall::Instance());
+          plyr->GetFSM()->ChangeState(Prior__KickBall::Instance());
       else if(state=="Dribble")
-         plyr->GetFSM()->ChangeState(Dribble::Instance());
+         plyr->GetFSM()->ChangeState(Prior__Dribble::Instance());
       else if(state=="ReceiveBall")
-          plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
+          plyr->GetFSM()->ChangeState(Prior__ReceiveBall::Instance());
       else if(state=="Wait")
-          plyr->GetFSM()->ChangeState(Wait::Instance());
-
+          plyr->GetFSM()->ChangeState(Prior__Wait::Instance());
+      else if(state=="TendGoal") {
+          Prior__GoalKeeper* plyr_g = static_cast<Prior__GoalKeeper*>(*it);
+          plyr_g->GetFSM()->ChangeState(Prior__TendGoal::Instance());
+      }
     }
   }
 
@@ -96,6 +99,17 @@ void Prior__Team::InitPlayers()
   coord = GameState.PlayerCoord(0);
   if(coord.first != 0 && coord.second != 0)
     Pitch()->Ball()->PlaceAtPosition(Vector2D(coord.first,coord.second));
+
+  // Get/Set team state, if specified in state file
+  state = GameState.TeamState(Color());
+  if(state=="Attacking") {
+    m_pStateMachine->SetCurrentState(Prior__Attacking::Instance());
+    m_pStateMachine->SetPreviousState(Prior__Attacking::Instance());
+  }
+  else if(state=="Defending") {
+    m_pStateMachine->SetCurrentState(Prior__Defending::Instance());
+    m_pStateMachine->SetPreviousState(Prior__Defending::Instance());
+  }
 
  }
 
@@ -110,8 +124,8 @@ void Prior__Team::CreatePlayers()
 	  // Create Blue players
     m_Players.push_back(new Prior__GoalKeeper(this,
                                1,
-                               TendGoal::Instance(),
-							   GlobalKeeperState::Instance(),
+                               Prior__TendGoal::Instance(),
+							   Prior__GlobalKeeperState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -122,8 +136,8 @@ void Prior__Team::CreatePlayers()
  
     m_Players.push_back(new Prior__FieldPlayer(this,
                                6,
-                               Wait::Instance(),
-							   GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+							   Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -137,8 +151,8 @@ void Prior__Team::CreatePlayers()
 
         m_Players.push_back(new Prior__FieldPlayer(this,
                                8,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -154,8 +168,8 @@ void Prior__Team::CreatePlayers()
 
         m_Players.push_back(new Prior__FieldPlayer(this,
                                3,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -168,8 +182,8 @@ void Prior__Team::CreatePlayers()
 
         m_Players.push_back(new Prior__FieldPlayer(this,
                                5,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -186,8 +200,8 @@ void Prior__Team::CreatePlayers()
 	  // Create Red players
     m_Players.push_back(new Prior__GoalKeeper(this,
                                16,
-                               TendGoal::Instance(),
-                               GlobalKeeperState::Instance(),
+                               Prior__TendGoal::Instance(),
+                               Prior__GlobalKeeperState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -198,8 +212,8 @@ void Prior__Team::CreatePlayers()
 
     m_Players.push_back(new Prior__FieldPlayer(this,
                                9,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -211,8 +225,8 @@ void Prior__Team::CreatePlayers()
 
     m_Players.push_back(new Prior__FieldPlayer(this,
                                11,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -226,8 +240,8 @@ void Prior__Team::CreatePlayers()
  
     m_Players.push_back(new Prior__FieldPlayer(this,
                                12,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -240,8 +254,8 @@ void Prior__Team::CreatePlayers()
 
     m_Players.push_back(new Prior__FieldPlayer(this,
                                14,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               Prior__Wait::Instance(),
+                               Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -273,8 +287,8 @@ void Prior__Team::UpdateTargetsOfWaitingPlayers()const
       //cast to a field player
       FieldPlayer* plyr = static_cast<FieldPlayer*>(*it);
       
-      if ( plyr->GetFSM()->isInState(*Wait::Instance()) ||
-           plyr->GetFSM()->isInState(*ReturnToHomeRegion::Instance()) )
+      if ( plyr->GetFSM()->isInState(*Prior__Wait::Instance()) ||
+           plyr->GetFSM()->isInState(*Prior__ReturnToHomeRegion::Instance()) )
       {
         plyr->Steering()->SetTarget(plyr->HomeRegion()->Center());
       }
@@ -318,7 +332,7 @@ bool Prior__Team::CanShoot(Vector2D  BallPos,
     //ShotTarget = OpponentsGoal()->Center();
     ShotTarget.x = OpponentsGoal()->Center().x;
 
-    int target; 
+    double target; 
     (fabs(goalYMin - goalie->Pos().y) > fabs(goalYMax - goalie->Pos().y)) ? target = goalYMin+2 : target = goalYMax-2;
     ShotTarget.y = target;
 
@@ -342,5 +356,14 @@ bool Prior__Team::CanShoot(Vector2D  BallPos,
   return false;
 }
 
+
+bool Prior__Team::FindPassOffBoards(const PlayerBase*const passer,
+                      PlayerBase*&           receiver,
+                      Vector2D&              PassTarget,
+                      double                 power,
+                      double                 MinPassingDistance)const
+{
+  return false;
+}
 
 

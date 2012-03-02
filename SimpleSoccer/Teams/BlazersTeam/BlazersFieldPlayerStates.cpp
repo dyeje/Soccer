@@ -1,9 +1,9 @@
-#include "FieldPlayerStates.h"
+#include "BlazersFieldPlayerStates.h"
 #include "Debug/DebugConsole.h"
 #include "../../SoccerPitch.h"
 #include "../../FieldPlayer.h"
 #include "../../SteeringBehaviors.h"
-#include "SoccerTeam.h"
+#include "BlazersTeam.h"
 #include "../../Goal.h"
 #include "2D/geometry.h"
 #include "../../SoccerBall.h"
@@ -21,15 +21,15 @@
 
 //************************************************************************ Global state
 
-GlobalPlayerState* GlobalPlayerState::Instance()
+BlazersGlobalPlayerState* BlazersGlobalPlayerState::Instance()
 {
-  static GlobalPlayerState instance;
+  static BlazersGlobalPlayerState instance;
 
   return &instance;
 }
 
 
-void GlobalPlayerState::Execute(FieldPlayer* player)                                     
+void BlazersGlobalPlayerState::Execute(FieldPlayer* player)                                     
 {
   //if a player is in possession and close to the ball reduce his max speed
   if((player->BallWithinReceivingRange()) && (player->isControllingPlayer()))
@@ -45,7 +45,7 @@ void GlobalPlayerState::Execute(FieldPlayer* player)
 }
 
 
-bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
+bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 {
   switch(telegram.Msg)
   {
@@ -55,7 +55,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
       player->Steering()->SetTarget(*(static_cast<Vector2D*>(telegram.ExtraInfo)));
 
       //change state 
-      player->GetFSM()->ChangeState(ReceiveBall::Instance());
+      player->GetFSM()->ChangeState(BlazersReceiveBall::Instance());
 
       return true;
     }
@@ -65,7 +65,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
   case Msg_SupportAttacker:
     {
       //if already supporting just return
-      if (player->GetFSM()->isInState(*SupportAttacker::Instance()))
+      if (player->GetFSM()->isInState(*BlazersSupportAttacker::Instance()))
       {
         return true;
       }
@@ -74,7 +74,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
       player->Steering()->SetTarget(player->Team()->GetSupportSpot());
 
       //change the state
-      player->GetFSM()->ChangeState(SupportAttacker::Instance());
+      player->GetFSM()->ChangeState(BlazersSupportAttacker::Instance());
 
       return true;
     }
@@ -84,7 +84,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
  case Msg_Wait:
     {
       //change the state
-      player->GetFSM()->ChangeState(Wait::Instance());
+      player->GetFSM()->ChangeState(BlazersWait::Instance());
 
       return true;
     }
@@ -95,7 +95,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
     {
       player->SetDefaultHomeRegion();
       
-      player->GetFSM()->ChangeState(ReturnToHomeRegion::Instance());
+      player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance());
 
       return true;
     }
@@ -145,7 +145,7 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
    
 
       //change state   
-      player->GetFSM()->ChangeState(Wait::Instance());
+      player->GetFSM()->ChangeState(BlazersWait::Instance());
 
       player->FindSupport();
 
@@ -164,15 +164,15 @@ bool GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 
 //***************************************************************************** CHASEBALL
 
-ChaseBall* ChaseBall::Instance()
+BlazersChaseBall* BlazersChaseBall::Instance()
 {
-  static ChaseBall instance;
+  static BlazersChaseBall instance;
 
   return &instance;
 }
 
 
-void ChaseBall::Enter(FieldPlayer* player)
+void BlazersChaseBall::Enter(FieldPlayer* player)
 {
   player->Steering()->SeekOn();
 
@@ -181,12 +181,12 @@ void ChaseBall::Enter(FieldPlayer* player)
   #endif
 }
 
-void ChaseBall::Execute(FieldPlayer* player)                                     
+void BlazersChaseBall::Execute(FieldPlayer* player)                                     
 {
   //if the ball is within kicking range the player changes state to KickBall.
   if (player->BallWithinKickingRange())
   {
-    player->GetFSM()->ChangeState(KickBall::Instance());
+    player->GetFSM()->ChangeState(BlazersKickBall::Instance());
     
     return;
   }
@@ -202,11 +202,11 @@ void ChaseBall::Execute(FieldPlayer* player)
   
   //if the player is not closest to the ball anymore, he should return back
   //to his home region and wait for another opportunity
-  player->GetFSM()->ChangeState(ReturnToHomeRegion::Instance());
+  player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance());
 }
 
 
-void ChaseBall::Exit(FieldPlayer* player)
+void BlazersChaseBall::Exit(FieldPlayer* player)
 {
   player->Steering()->SeekOff();
 }
@@ -215,15 +215,15 @@ void ChaseBall::Exit(FieldPlayer* player)
 
 //*****************************************************************************SUPPORT ATTACKING PLAYER
 
-SupportAttacker* SupportAttacker::Instance()
+BlazersSupportAttacker* BlazersSupportAttacker::Instance()
 {
-  static SupportAttacker instance;
+  static BlazersSupportAttacker instance;
 
   return &instance;
 }
 
 
-void SupportAttacker::Enter(FieldPlayer* player)
+void BlazersSupportAttacker::Enter(FieldPlayer* player)
 {
   player->Steering()->ArriveOn();
 
@@ -234,12 +234,12 @@ void SupportAttacker::Enter(FieldPlayer* player)
   #endif
 }
 
-void SupportAttacker::Execute(FieldPlayer* player)                                     
+void BlazersSupportAttacker::Execute(FieldPlayer* player)                                     
 {
   //if his team loses control go back home
   if (!player->Team()->InControl())
   {
-    player->GetFSM()->ChangeState(ReturnToHomeRegion::Instance()); return;
+    player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance()); return;
   } 
 
 
@@ -280,7 +280,7 @@ void SupportAttacker::Execute(FieldPlayer* player)
 }
 
 
-void SupportAttacker::Exit(FieldPlayer* player)
+void BlazersSupportAttacker::Exit(FieldPlayer* player)
 {
   //set supporting player to null so that the team knows it has to 
   //determine a new one.
@@ -294,15 +294,15 @@ void SupportAttacker::Exit(FieldPlayer* player)
 
 //************************************************************************ RETURN TO HOME REGION
 
-ReturnToHomeRegion* ReturnToHomeRegion::Instance()
+BlazersReturnToHomeRegion* BlazersReturnToHomeRegion::Instance()
 {
-  static ReturnToHomeRegion instance;
+  static BlazersReturnToHomeRegion instance;
 
   return &instance;
 }
 
 
-void ReturnToHomeRegion::Enter(FieldPlayer* player)
+void BlazersReturnToHomeRegion::Enter(FieldPlayer* player)
 {
   player->Steering()->ArriveOn();
 
@@ -316,7 +316,7 @@ void ReturnToHomeRegion::Enter(FieldPlayer* player)
   #endif
 }
 
-void ReturnToHomeRegion::Execute(FieldPlayer* player)
+void BlazersReturnToHomeRegion::Execute(FieldPlayer* player)
 {
   if (player->Pitch()->GameOn())
   {
@@ -327,7 +327,7 @@ void ReturnToHomeRegion::Execute(FieldPlayer* player)
          (player->Team()->Receiver() == NULL) &&
          !player->Pitch()->GoalKeeperHasBall())
     {
-      player->GetFSM()->ChangeState(ChaseBall::Instance());
+      player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
 
       return;
     }
@@ -340,17 +340,17 @@ void ReturnToHomeRegion::Execute(FieldPlayer* player)
                                                              Region::halfsize))
   {
     player->Steering()->SetTarget(player->Pos());
-    player->GetFSM()->ChangeState(Wait::Instance());
+    player->GetFSM()->ChangeState(BlazersWait::Instance());
   }
   //if game is not on the player must return much closer to the center of his
   //home region
   else if(!player->Pitch()->GameOn() && player->AtTarget())
   {
-    player->GetFSM()->ChangeState(Wait::Instance());
+    player->GetFSM()->ChangeState(BlazersWait::Instance());
   }
 }
 
-void ReturnToHomeRegion::Exit(FieldPlayer* player)
+void BlazersReturnToHomeRegion::Exit(FieldPlayer* player)
 {
   player->Steering()->ArriveOff();
 }
@@ -360,15 +360,15 @@ void ReturnToHomeRegion::Exit(FieldPlayer* player)
 
 //***************************************************************************** WAIT
 
-Wait* Wait::Instance()
+BlazersWait* BlazersWait::Instance()
 {
-  static Wait instance;
+  static BlazersWait instance;
 
   return &instance;
 }
 
 
-void Wait::Enter(FieldPlayer* player)
+void BlazersWait::Enter(FieldPlayer* player)
 {
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters wait state" << "";
@@ -383,7 +383,7 @@ void Wait::Enter(FieldPlayer* player)
   }
 }
 
-void Wait::Execute(FieldPlayer* player)
+void BlazersWait::Execute(FieldPlayer* player)
 {    
   //if the player has been jostled out of position, get back in position  
   if (!player->AtTarget())
@@ -423,29 +423,29 @@ void Wait::Execute(FieldPlayer* player)
        player->Team()->Receiver() == NULL  &&
        !player->Pitch()->GoalKeeperHasBall())
    {
-     player->GetFSM()->ChangeState(ChaseBall::Instance());
+     player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
 
      return;
    }
   } 
 }
 
-void Wait::Exit(FieldPlayer* player){}
+void BlazersWait::Exit(FieldPlayer* player){}
 
 
 
 
 //************************************************************************ KICK BALL
 
-KickBall* KickBall::Instance()
+BlazersKickBall* BlazersKickBall::Instance()
 {
-  static KickBall instance;
+  static BlazersKickBall instance;
 
   return &instance;
 }
 
 
-void KickBall::Enter(FieldPlayer* player)
+void BlazersKickBall::Enter(FieldPlayer* player)
 {
   //let the team know this player is controlling
    player->Team()->SetControllingPlayer(player);
@@ -453,7 +453,7 @@ void KickBall::Enter(FieldPlayer* player)
    //the player can only make so many kick attempts per second.
    if (!player->isReadyForNextKick()) 
    {
-     player->GetFSM()->ChangeState(ChaseBall::Instance());
+     player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
    }
 
    
@@ -462,7 +462,7 @@ void KickBall::Enter(FieldPlayer* player)
   #endif
 }
 
-void KickBall::Execute(FieldPlayer* player)
+void BlazersKickBall::Execute(FieldPlayer* player)
 { 
   //calculate the dot product of the vector pointing to the ball
   //and the player's heading
@@ -480,7 +480,7 @@ void KickBall::Execute(FieldPlayer* player)
     debug_con << "Goaly has ball / ball behind player" << "";
     #endif
     
-    player->GetFSM()->ChangeState(ChaseBall::Instance());
+    player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
 
     return;
   }
@@ -518,15 +518,25 @@ void KickBall::Execute(FieldPlayer* player)
    player->Ball()->Kick(KickDirection, power);
     
    //change state   
-   player->GetFSM()->ChangeState(Wait::Instance());
+   player->GetFSM()->ChangeState(BlazersWait::Instance());
    
    player->FindSupport();
   
    return;
  }
 
+  // /* Attempt a pass to a player off the boards */
+  // /* Stealth move defender would not expect    */
+  // if (player->Team()->FindPassOffBoards(player,
+  //                                     receiver,
+  //                                     BallTarget,
+  //                                     power,
+  //                                     Prm.MinPassDist))
+  // {     
+  //   assert(false);
+  // }
 
-  /* Attempt a pass to a player */
+  /* Attempt a pass to a player (original way) */
 
   //if a receiver is found this will point to it
   PlayerBase* receiver = NULL;
@@ -564,7 +574,7 @@ void KickBall::Execute(FieldPlayer* player)
 
     //the player should wait at his current position unless instruced
     //otherwise  
-    player->GetFSM()->ChangeState(Wait::Instance());
+    player->GetFSM()->ChangeState(BlazersWait::Instance());
 
     player->FindSupport();
 
@@ -576,22 +586,22 @@ void KickBall::Execute(FieldPlayer* player)
   {   
     player->FindSupport();
 
-    player->GetFSM()->ChangeState(Dribble::Instance());
+    player->GetFSM()->ChangeState(BlazersDribble::Instance());
   }   
 }
 
 
 //*************************************************************************** DRIBBLE
 
-Dribble* Dribble::Instance()
+BlazersDribble* BlazersDribble::Instance()
 {
-  static Dribble instance;
+  static BlazersDribble instance;
 
   return &instance;
 }
 
 
-void Dribble::Enter(FieldPlayer* player)
+void BlazersDribble::Enter(FieldPlayer* player)
 {
   //let the team know this player is controlling
   player->Team()->SetControllingPlayer(player);
@@ -601,7 +611,7 @@ void Dribble::Enter(FieldPlayer* player)
   #endif
 }
 
-void Dribble::Execute(FieldPlayer* player)
+void BlazersDribble::Execute(FieldPlayer* player)
 {
   double dot = player->Team()->HomeGoal()->Facing().Dot(player->Heading());
 
@@ -637,7 +647,7 @@ void Dribble::Execute(FieldPlayer* player)
   }
 
   //the player has kicked the ball so he must now change state to follow it
-  player->GetFSM()->ChangeState(ChaseBall::Instance());
+  player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
     
   return;  
 }
@@ -646,15 +656,15 @@ void Dribble::Execute(FieldPlayer* player)
 
 //************************************************************************     RECEIVEBALL
 
-ReceiveBall* ReceiveBall::Instance()
+BlazersReceiveBall* BlazersReceiveBall::Instance()
 {
-  static ReceiveBall instance;
+  static BlazersReceiveBall instance;
 
   return &instance;
 }
 
 
-void ReceiveBall::Enter(FieldPlayer* player)
+void BlazersReceiveBall::Enter(FieldPlayer* player)
 {
   //let the team know this player is receiving the ball
   player->Team()->SetReceiver(player);
@@ -692,13 +702,13 @@ void ReceiveBall::Enter(FieldPlayer* player)
   }
 }
 
-void ReceiveBall::Execute(FieldPlayer* player)
+void BlazersReceiveBall::Execute(FieldPlayer* player)
 {
   //if the ball comes close enough to the player or if his team lose control
   //he should change state to chase the ball
   if (player->BallWithinReceivingRange() || !player->Team()->InControl())
   {
-    player->GetFSM()->ChangeState(ChaseBall::Instance());
+    player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
 
     return;
   }  
@@ -719,7 +729,7 @@ void ReceiveBall::Execute(FieldPlayer* player)
   } 
 }
 
-void ReceiveBall::Exit(FieldPlayer* player)
+void BlazersReceiveBall::Exit(FieldPlayer* player)
 {
   player->Steering()->ArriveOff();
   player->Steering()->PursuitOff();

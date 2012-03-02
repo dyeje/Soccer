@@ -1,10 +1,10 @@
-#include "GoalKeeperStates.h"
+#include "BlazersGoalKeeperStates.h"
 #include "Debug/DebugConsole.h"
 #include "../../SoccerPitch.h"
 #include "../../PlayerBase.h"
 #include "../../GoalKeeper.h"
 #include "../../SteeringBehaviors.h"
-#include "SoccerTeam.h"
+#include "BlazersTeam.h"
 #include "../../Goal.h"
 #include "2D/geometry.h"
 #include "../../FieldPlayer.h"
@@ -18,18 +18,18 @@
 //#define GOALY_STATE_INFO_ON
 
 
-//--------------------------- GlobalKeeperState -------------------------------
+//--------------------------- BlazersGlobalKeeperState -------------------------------
 //-----------------------------------------------------------------------------
 
-GlobalKeeperState* GlobalKeeperState::Instance()
+BlazersGlobalKeeperState* BlazersGlobalKeeperState::Instance()
 {
-  static GlobalKeeperState instance;
+  static BlazersGlobalKeeperState instance;
 
   return &instance;
 }
 
 
-bool GlobalKeeperState::OnMessage(GoalKeeper* keeper, const Telegram& telegram)
+bool BlazersGlobalKeeperState::OnMessage(GoalKeeper* keeper, const Telegram& telegram)
 {
   switch(telegram.Msg)
   {
@@ -37,14 +37,14 @@ bool GlobalKeeperState::OnMessage(GoalKeeper* keeper, const Telegram& telegram)
     {
       keeper->SetDefaultHomeRegion();
       
-      keeper->GetFSM()->ChangeState(ReturnHome::Instance());
+      keeper->GetFSM()->ChangeState(BlazersReturnHome::Instance());
     }
 
     break;
 
     case Msg_ReceiveBall:
       {
-        keeper->GetFSM()->ChangeState(InterceptBall::Instance());
+        keeper->GetFSM()->ChangeState(BlazersInterceptBall::Instance());
       }
 
       break;
@@ -55,7 +55,7 @@ bool GlobalKeeperState::OnMessage(GoalKeeper* keeper, const Telegram& telegram)
 }
 
 
-//--------------------------- TendGoal -----------------------------------
+//--------------------------- BlazersTendGoal -----------------------------------
 //
 //  This is the main state for the goalkeeper. When in this state he will
 //  move left to right across the goalmouth using the 'interpose' steering
@@ -65,15 +65,15 @@ bool GlobalKeeperState::OnMessage(GoalKeeper* keeper, const Telegram& telegram)
 //  goalmouth to attempt to intercept it. (see next state)
 //------------------------------------------------------------------------
 
-TendGoal* TendGoal::Instance()
+BlazersTendGoal* BlazersTendGoal::Instance()
 {
-  static TendGoal instance;
+  static BlazersTendGoal instance;
 
   return &instance;
 }
 
 
-void TendGoal::Enter(GoalKeeper* keeper)
+void BlazersTendGoal::Enter(GoalKeeper* keeper)
 {
   //turn interpose on
   keeper->Steering()->InterposeOn(Prm.GoalKeeperTendingDistance);
@@ -83,9 +83,9 @@ void TendGoal::Enter(GoalKeeper* keeper)
   keeper->Steering()->SetTarget(keeper->GetRearInterposeTarget());
 }
 
-void TendGoal::Execute(GoalKeeper* keeper)
+void BlazersTendGoal::Execute(GoalKeeper* keeper)
 {
-  target = max(fabs(goalYMin - goalyPos.x), fabs(goalYMax - goalyPos.x));
+  // target = max(fabs(goalYMin - goalyPos.x), fabs(goalYMax - goalyPos.x));
 	//ShotTarget.y = target;
 
  //   //make sure striking the ball with the given power is enough to drive
@@ -116,7 +116,7 @@ void TendGoal::Execute(GoalKeeper* keeper)
 
     keeper->Pitch()->SetGoalKeeperHasBall(true);
 
-    keeper->GetFSM()->ChangeState(PutBallBackInPlay::Instance());
+    keeper->GetFSM()->ChangeState(BlazersPutBallBackInPlay::Instance());
 
     return;
   }
@@ -125,46 +125,46 @@ void TendGoal::Execute(GoalKeeper* keeper)
   //position to try and intercept it.
   if (keeper->BallWithinRangeForIntercept() && !keeper->Team()->InControl())
   {
-    keeper->GetFSM()->ChangeState(InterceptBall::Instance());
+    keeper->GetFSM()->ChangeState(BlazersInterceptBall::Instance());
   }
 
   //if the keeper has ventured too far away from the goal-line and there
   //is no threat from the opponents he should move back towards it
   if (keeper->TooFarFromGoalMouth() && keeper->Team()->InControl())
   {
-    keeper->GetFSM()->ChangeState(ReturnHome::Instance());
+    keeper->GetFSM()->ChangeState(BlazersReturnHome::Instance());
 
     return;
   }
 }
 
 
-void TendGoal::Exit(GoalKeeper* keeper)
+void BlazersTendGoal::Exit(GoalKeeper* keeper)
 {
   keeper->Steering()->InterposeOff();
 }
 
 
-//------------------------- ReturnHome: ----------------------------------
+//------------------------- BlazersReturnHome: ----------------------------------
 //
 //  In this state the goalkeeper simply returns back to the center of
-//  the goal region before changing state back to TendGoal
+//  the goal region before changing state back to BlazersTendGoal
 //------------------------------------------------------------------------
 
-ReturnHome* ReturnHome::Instance()
+BlazersReturnHome* BlazersReturnHome::Instance()
 {
-  static ReturnHome instance;
+  static BlazersReturnHome instance;
 
   return &instance;
 }
 
 
-void ReturnHome::Enter(GoalKeeper* keeper)
+void BlazersReturnHome::Enter(GoalKeeper* keeper)
 {
   keeper->Steering()->ArriveOn();
 }
 
-void ReturnHome::Execute(GoalKeeper* keeper)
+void BlazersReturnHome::Execute(GoalKeeper* keeper)
 {
   keeper->Steering()->SetTarget(keeper->HomeRegion()->Center());
 
@@ -172,49 +172,49 @@ void ReturnHome::Execute(GoalKeeper* keeper)
   //change state to tend goal
   if (keeper->InHomeRegion() || !keeper->Team()->InControl())
   {
-    keeper->GetFSM()->ChangeState(TendGoal::Instance());
+    keeper->GetFSM()->ChangeState(BlazersTendGoal::Instance());
   }
 }
 
-void ReturnHome::Exit(GoalKeeper* keeper)
+void BlazersReturnHome::Exit(GoalKeeper* keeper)
 {
   keeper->Steering()->ArriveOff();
 }
 
 
 
-//----------------- InterceptBall ----------------------------------------
+//----------------- BlazersInterceptBall ----------------------------------------
 //
 //  In this state the GP will attempt to intercept the ball using the
 //  pursuit steering behavior, but he only does so so long as he remains
 //  within his home region.
 //------------------------------------------------------------------------
 
-InterceptBall* InterceptBall::Instance()
+BlazersInterceptBall* BlazersInterceptBall::Instance()
 {
-  static InterceptBall instance;
+  static BlazersInterceptBall instance;
 
   return &instance;
 }
 
 
-void InterceptBall::Enter(GoalKeeper* keeper)
+void BlazersInterceptBall::Enter(GoalKeeper* keeper)
 {
   keeper->Steering()->PursuitOn();  
 
     #ifdef GOALY_STATE_INFO_ON
-    debug_con << "Goaly " << keeper->ID() << " enters InterceptBall" <<  "";
+    debug_con << "Goaly " << keeper->ID() << " enters BlazersInterceptBall" <<  "";
     #endif
 }
 
-void InterceptBall::Execute(GoalKeeper* keeper)
+void BlazersInterceptBall::Execute(GoalKeeper* keeper)
 { 
   //if the goalkeeper moves to far away from the goal he should return to his
   //home region UNLESS he is the closest player to the ball, in which case,
   //he should keep trying to intercept it.
   if (keeper->TooFarFromGoalMouth() && !keeper->isClosestPlayerOnPitchToBall())
   {
-    keeper->GetFSM()->ChangeState(ReturnHome::Instance());
+    keeper->GetFSM()->ChangeState(BlazersReturnHome::Instance());
 
     return;
   }
@@ -227,31 +227,31 @@ void InterceptBall::Execute(GoalKeeper* keeper)
     
     keeper->Pitch()->SetGoalKeeperHasBall(true);
 
-    keeper->GetFSM()->ChangeState(PutBallBackInPlay::Instance());
+    keeper->GetFSM()->ChangeState(BlazersPutBallBackInPlay::Instance());
 
     return;
   }
 }
 
-void InterceptBall::Exit(GoalKeeper* keeper)
+void BlazersInterceptBall::Exit(GoalKeeper* keeper)
 {
   keeper->Steering()->PursuitOff();
 }
 
 
 
-//--------------------------- PutBallBackInPlay --------------------------
+//--------------------------- BlazersPutBallBackInPlay --------------------------
 //
 //------------------------------------------------------------------------
 
-PutBallBackInPlay* PutBallBackInPlay::Instance()
+BlazersPutBallBackInPlay* BlazersPutBallBackInPlay::Instance()
 {
-  static PutBallBackInPlay instance;
+  static BlazersPutBallBackInPlay instance;
 
   return &instance;
 }
 
-void PutBallBackInPlay::Enter(GoalKeeper* keeper)
+void BlazersPutBallBackInPlay::Enter(GoalKeeper* keeper)
 {
   //let the team know that the keeper is in control
   keeper->Team()->SetControllingPlayer(keeper);
@@ -262,7 +262,7 @@ void PutBallBackInPlay::Enter(GoalKeeper* keeper)
 }
 
 
-void PutBallBackInPlay::Execute(GoalKeeper* keeper)
+void BlazersPutBallBackInPlay::Execute(GoalKeeper* keeper)
 {
   PlayerBase*  receiver = NULL;
   Vector2D     BallTarget;
@@ -290,7 +290,7 @@ void PutBallBackInPlay::Execute(GoalKeeper* keeper)
                           &BallTarget);
     
     //go back to tending the goal   
-    keeper->GetFSM()->ChangeState(TendGoal::Instance());
+    keeper->GetFSM()->ChangeState(BlazersTendGoal::Instance());
 
     return;
   }  

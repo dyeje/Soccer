@@ -37,7 +37,7 @@ public:
              double         scale,
              player_role role);
   
-  void ForcePosition(int x, int y);
+  void ForcePosition(double x, double y);
   int HomeRegion();
 
 };

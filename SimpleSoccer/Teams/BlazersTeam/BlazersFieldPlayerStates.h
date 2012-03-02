@@ -2,7 +2,7 @@
 #define FIELDPLAYERSTATES_H
 //------------------------------------------------------------------------
 //
-//  Name: FieldPlayerStates.h
+//  Name: BlazersFieldPlayerStates.h
 //
 //  Desc: States for the field players of Simple Soccer. See my book
 //        for detailed descriptions
@@ -23,16 +23,16 @@ class SoccerPitch;
 
 
 //------------------------------------------------------------------------
-class GlobalPlayerState : public State<FieldPlayer>
+class BlazersGlobalPlayerState : public State<FieldPlayer>
 {
 private:
   
-  GlobalPlayerState(){}
+  BlazersGlobalPlayerState(){}
 
 public:
 
   //this is a singleton
-  static GlobalPlayerState* Instance();
+  static BlazersGlobalPlayerState* Instance();
 
   void Enter(FieldPlayer* player){}
 
@@ -44,16 +44,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ChaseBall : public State<FieldPlayer>
+class BlazersChaseBall : public State<FieldPlayer>
 {
 private:
   
-  ChaseBall(){}
+  BlazersChaseBall(){}
 
 public:
 
   //this is a singleton
-  static ChaseBall* Instance();
+  static BlazersChaseBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -65,16 +65,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class Dribble : public State<FieldPlayer>
+class BlazersDribble : public State<FieldPlayer>
 {
 private:
   
-  Dribble(){}
+  BlazersDribble(){}
 
 public:
 
   //this is a singleton
-  static Dribble* Instance();
+  static BlazersDribble* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -87,16 +87,16 @@ public:
 
 
 //------------------------------------------------------------------------
-class ReturnToHomeRegion: public State<FieldPlayer>
+class BlazersReturnToHomeRegion: public State<FieldPlayer>
 {
 private:
   
-  ReturnToHomeRegion(){}
+  BlazersReturnToHomeRegion(){}
 
 public:
 
   //this is a singleton
-  static ReturnToHomeRegion* Instance();
+  static BlazersReturnToHomeRegion* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -108,16 +108,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class Wait: public State<FieldPlayer>
+class BlazersWait: public State<FieldPlayer>
 {
 private:
   
-  Wait(){}
+  BlazersWait(){}
 
 public:
 
   //this is a singleton
-  static Wait* Instance();
+  static BlazersWait* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -129,16 +129,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class KickBall: public State<FieldPlayer>
+class BlazersKickBall: public State<FieldPlayer>
 {
 private:
   
-  KickBall(){}
+  BlazersKickBall(){}
 
 public:
 
   //this is a singleton
-  static KickBall* Instance();
+  static BlazersKickBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -150,16 +150,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ReceiveBall: public State<FieldPlayer>
+class BlazersReceiveBall: public State<FieldPlayer>
 {
 private:
   
-  ReceiveBall(){}
+  BlazersReceiveBall(){}
 
 public:
 
   //this is a singleton
-  static ReceiveBall* Instance();
+  static BlazersReceiveBall* Instance();
 
   void Enter(FieldPlayer* player);
 
@@ -172,16 +172,16 @@ public:
 
 
 //------------------------------------------------------------------------
-class SupportAttacker: public State<FieldPlayer>
+class BlazersSupportAttacker: public State<FieldPlayer>
 {
 private:
   
-  SupportAttacker(){}
+  BlazersSupportAttacker(){}
 
 public:
 
   //this is a singleton
-  static SupportAttacker* Instance();
+  static BlazersSupportAttacker* Instance();
 
   void Enter(FieldPlayer* player);
 

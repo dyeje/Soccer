@@ -7,8 +7,8 @@
 #include "GameStateLoader.h"
 #include "misc/utils.h"
 #include "../../SteeringBehaviors.h"
-#include "FieldPlayerStates.h"
-#include "GoalKeeperStates.h"
+#include "BlazersFieldPlayerStates.h"
+#include "BlazersGoalKeeperStates.h"
 #include "../../ParamLoader.h"
 #include "2D/geometry.h"
 #include "Game/EntityManager.h"
@@ -77,20 +77,20 @@ void BlazersTeam::InitPlayers()
       plyr->ForcePosition(coord.first,coord.second);
       state = GameState.PlayerState(plyr->HomeRegion());
       if(state=="ChaseBall")
-          plyr->GetFSM()->ChangeState(ChaseBall::Instance());
+          plyr->GetFSM()->ChangeState(BlazersChaseBall::Instance());
       else if(state=="SupportAttacker")
-          plyr->GetFSM()->ChangeState(SupportAttacker::Instance());
+          plyr->GetFSM()->ChangeState(BlazersSupportAttacker::Instance());
       else if(state=="KickBall")
-          plyr->GetFSM()->ChangeState(KickBall::Instance());
+          plyr->GetFSM()->ChangeState(BlazersKickBall::Instance());
       else if(state=="Dribble")
-         plyr->GetFSM()->ChangeState(Dribble::Instance());
+         plyr->GetFSM()->ChangeState(BlazersDribble::Instance());
       else if(state=="ReceiveBall")
-          plyr->GetFSM()->ChangeState(ReceiveBall::Instance());
+          plyr->GetFSM()->ChangeState(BlazersReceiveBall::Instance());
       else if(state=="Wait")
-          plyr->GetFSM()->ChangeState(Wait::Instance());
+          plyr->GetFSM()->ChangeState(BlazersWait::Instance());
       else if(state=="TendGoal") {
           BlazersGoalKeeper* plyr_g = static_cast<BlazersGoalKeeper*>(*it);
-          plyr_g->GetFSM()->ChangeState(TendGoal::Instance());
+          plyr_g->GetFSM()->ChangeState(BlazersTendGoal::Instance());
       }
     }
   }
@@ -124,8 +124,8 @@ void BlazersTeam::CreatePlayers()
 	  // Create Blue players
     m_Players.push_back(new BlazersGoalKeeper(this,
                                1,
-                               TendGoal::Instance(),
-							   GlobalKeeperState::Instance(),
+                               BlazersTendGoal::Instance(),
+							   BlazersGlobalKeeperState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -136,8 +136,8 @@ void BlazersTeam::CreatePlayers()
  
     m_Players.push_back(new BlazersFieldPlayer(this,
                                6,
-                               Wait::Instance(),
-							   GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+							   BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -151,8 +151,8 @@ void BlazersTeam::CreatePlayers()
 
         m_Players.push_back(new BlazersFieldPlayer(this,
                                8,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -168,8 +168,8 @@ void BlazersTeam::CreatePlayers()
 
         m_Players.push_back(new BlazersFieldPlayer(this,
                                3,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -182,8 +182,8 @@ void BlazersTeam::CreatePlayers()
 
         m_Players.push_back(new BlazersFieldPlayer(this,
                                5,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -200,8 +200,8 @@ void BlazersTeam::CreatePlayers()
 	  // Create Red players
     m_Players.push_back(new BlazersGoalKeeper(this,
                                16,
-                               TendGoal::Instance(),
-                               GlobalKeeperState::Instance(),
+                               BlazersTendGoal::Instance(),
+                               BlazersGlobalKeeperState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -212,8 +212,8 @@ void BlazersTeam::CreatePlayers()
 
     m_Players.push_back(new BlazersFieldPlayer(this,
                                9,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -225,8 +225,8 @@ void BlazersTeam::CreatePlayers()
 
     m_Players.push_back(new BlazersFieldPlayer(this,
                                11,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -240,8 +240,8 @@ void BlazersTeam::CreatePlayers()
  
     m_Players.push_back(new BlazersFieldPlayer(this,
                                12,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -254,8 +254,8 @@ void BlazersTeam::CreatePlayers()
 
     m_Players.push_back(new BlazersFieldPlayer(this,
                                14,
-                               Wait::Instance(),
-                               GlobalPlayerState::Instance(),
+                               BlazersWait::Instance(),
+                               BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
@@ -287,8 +287,8 @@ void BlazersTeam::UpdateTargetsOfWaitingPlayers()const
       //cast to a field player
       FieldPlayer* plyr = static_cast<FieldPlayer*>(*it);
       
-      if ( plyr->GetFSM()->isInState(*Wait::Instance()) ||
-           plyr->GetFSM()->isInState(*ReturnToHomeRegion::Instance()) )
+      if ( plyr->GetFSM()->isInState(*BlazersWait::Instance()) ||
+           plyr->GetFSM()->isInState(*BlazersReturnToHomeRegion::Instance()) )
       {
         plyr->Steering()->SetTarget(plyr->HomeRegion()->Center());
       }
@@ -356,5 +356,14 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
   return false;
 }
 
+
+bool BlazersTeam::FindPassOffBoards(const PlayerBase*const passer,
+                      PlayerBase*&           receiver,
+                      Vector2D&              PassTarget,
+                      double                 power,
+                      double                 MinPassingDistance)const
+{
+  return false;
+}
 
 

@@ -54,12 +54,16 @@ public:
 	
   void UpdateTargetsOfWaitingPlayers()const;
 
-  //returns true if player has a clean shot at the goal and sets ShotTarget
-  //to a normalized vector pointing in the direction the shot should be
-  //made. Else returns false and sets heading to a zero vector
-  virtual bool        CanShoot(Vector2D  BallPos,
+  // Override AbstSoccerTeam::CanShoot 
+  virtual bool CanShoot(Vector2D  BallPos,
                        double     power, 
-                       Vector2D& ShotTarget = Vector2D())const;
+                       Vector2D&  ShotTarget = Vector2D())const;
+
+  bool FindPassOffBoards(const PlayerBase*const passer,
+                        PlayerBase*&            receiver,
+                        Vector2D&               PassTarget,
+                        double                  power,
+                        double                  MinPassingDistance)const;
 
 	double goalYMin;
 	double goalYMax;

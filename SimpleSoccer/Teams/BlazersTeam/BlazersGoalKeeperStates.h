@@ -20,16 +20,16 @@ class GoalKeeper;
 class SoccerPitch;
 
 
-class GlobalKeeperState: public State<GoalKeeper>
+class BlazersGlobalKeeperState: public State<GoalKeeper>
 {
 private:
   
-  GlobalKeeperState(){}
+  BlazersGlobalKeeperState(){}
 
 public:
 
   //this is a singleton
-  static GlobalKeeperState* Instance();
+  static BlazersGlobalKeeperState* Instance();
 
   void Enter(GoalKeeper* keeper){}
 
@@ -42,16 +42,16 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class TendGoal: public State<GoalKeeper>
+class BlazersTendGoal: public State<GoalKeeper>
 {
 private:
   
-  TendGoal(){}
+  BlazersTendGoal(){}
 
 public:
 
   //this is a singleton
-  static TendGoal* Instance();
+  static BlazersTendGoal* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -63,16 +63,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class InterceptBall: public State<GoalKeeper>
+class BlazersInterceptBall: public State<GoalKeeper>
 {
 private:
   
-  InterceptBall(){}
+  BlazersInterceptBall(){}
 
 public:
 
   //this is a singleton
-  static InterceptBall* Instance();
+  static BlazersInterceptBall* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -84,16 +84,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class ReturnHome: public State<GoalKeeper>
+class BlazersReturnHome: public State<GoalKeeper>
 {
 private:
   
-  ReturnHome(){}
+  BlazersReturnHome(){}
 
 public:
 
   //this is a singleton
-  static ReturnHome* Instance();
+  static BlazersReturnHome* Instance();
 
   void Enter(GoalKeeper* keeper);
 
@@ -105,16 +105,16 @@ public:
 };
 
 //------------------------------------------------------------------------
-class PutBallBackInPlay: public State<GoalKeeper>
+class BlazersPutBallBackInPlay: public State<GoalKeeper>
 {
 private:
   
-  PutBallBackInPlay(){}
+  BlazersPutBallBackInPlay(){}
 
 public:
 
   //this is a singleton
-  static PutBallBackInPlay* Instance();
+  static BlazersPutBallBackInPlay* Instance();
 
   void Enter(GoalKeeper* keeper);
 

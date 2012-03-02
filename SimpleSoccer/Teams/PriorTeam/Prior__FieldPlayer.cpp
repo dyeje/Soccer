@@ -46,7 +46,7 @@ Prior__FieldPlayer::Prior__FieldPlayer(AbstSoccerTeam* home_team,
 {
 }
 
-void Prior__FieldPlayer::ForcePosition(int x, int y) {
+void Prior__FieldPlayer::ForcePosition(double x, double y) {
   m_vPosition.x = x;
   m_vPosition.y = y;
 }
