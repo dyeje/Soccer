@@ -332,7 +332,7 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
     //ShotTarget = OpponentsGoal()->Center();
     ShotTarget.x = OpponentsGoal()->Center().x;
 
-    int target; 
+    double target; 
     (fabs(goalYMin - goalie->Pos().y) > fabs(goalYMax - goalie->Pos().y)) ? target = goalYMin+2 : target = goalYMax-2;
     ShotTarget.y = target;
 

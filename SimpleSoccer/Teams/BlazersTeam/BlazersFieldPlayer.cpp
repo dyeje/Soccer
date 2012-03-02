@@ -46,7 +46,7 @@ BlazersFieldPlayer::BlazersFieldPlayer(AbstSoccerTeam* home_team,
 {
 }
 
-void BlazersFieldPlayer::ForcePosition(int x, int y) {
+void BlazersFieldPlayer::ForcePosition(double x, double y) {
   m_vPosition.x = x;
   m_vPosition.y = y;
 }
