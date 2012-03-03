@@ -38,6 +38,7 @@ BlazersTeam::BlazersTeam(Goal*        home_goal,
   ballRadius = Pitch()->Ball()->BRadius();
   goalYMin = ((pitch->cyClient()/2) - Prm.GoalWidth/2) + ballRadius;
   goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2 - ballRadius;
+  opponentGoalie = NULL;
 }
 
 
@@ -311,15 +312,16 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
                           double     power, 
                           Vector2D& ShotTarget)const
 {
-  PlayerBase* goalie;   
-	std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
-
-	for (opp; opp != Opponents()->Members().end(); ++opp)
-	{
-		if ((*opp)->Role() == PlayerBase::goal_keeper)
-		{
-			goalie = (*opp);
-		}
+  if(!opponentGoalie) {
+    // Find and cache Opponent's Goalie
+	  std::vector<PlayerBase*>::const_iterator opp = Opponents()->Members().begin();
+	  for (opp; opp != Opponents()->Members().end(); ++opp)
+	  {
+		  if ((*opp)->Role() == PlayerBase::goal_keeper)
+		  {
+        (const_cast<PlayerBase*>(opponentGoalie)) = const_cast<PlayerBase*>(*opp);
+		  }
+	  }
 	}
 
 	//the number of randomly created shot targets this method will test 
@@ -333,7 +335,9 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
     ShotTarget.x = OpponentsGoal()->Center().x;
 
     double target; 
-    (fabs(goalYMin - goalie->Pos().y) > fabs(goalYMax - goalie->Pos().y)) ? target = goalYMin+2 : target = goalYMax-2;
+    (fabs(goalYMin - opponentGoalie->Pos().y) > fabs(goalYMax - opponentGoalie->Pos().y)) 
+      ? target = goalYMin+2 
+      : target = goalYMax-2;  
     ShotTarget.y = target;
 
     //make sure striking the ball with the given power is enough to drive

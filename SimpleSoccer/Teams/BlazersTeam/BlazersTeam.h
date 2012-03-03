@@ -68,7 +68,7 @@ public:
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
-	//PlayerBase* goalie;
+	PlayerBase* opponentGoalie;
 
 };
 
