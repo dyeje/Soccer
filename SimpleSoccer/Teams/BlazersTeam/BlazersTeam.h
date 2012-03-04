@@ -73,8 +73,9 @@ public:
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
+  int pitchMinY;
+  int pitchMaxY;
 	PlayerBase* opponentGoalie;
-
 };
 
 #endif

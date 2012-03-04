@@ -428,6 +428,12 @@ void BlazersWait::Execute(FieldPlayer* player)
      return;
    }
   } 
+
+  if (!player->Team()->InControl())
+  {
+    player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
+  }
+
 }
 
 void BlazersWait::Exit(FieldPlayer* player){}
@@ -530,45 +536,11 @@ void BlazersKickBall::Execute(FieldPlayer* player)
    return;
  }
 
-  /* 2) Attempt to pass to another player */
-  /* ------------------------------------ */
-  
+ 
+  // 2) Attempt a pass to a player (original Buckland way)
+
   PlayerBase* receiver = NULL; //if a receiver is found this will point to it
   power = Prm.MaxPassingForce * dot;
-
-  // Attempt a pass to a player off the boards (Stealth move defender won't expect)
-
-  // If there are any potential candidates available to receive a pass, then pass
-  BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
-  if (team->FindPassOffBoards(player,
-    receiver,
-    BallTarget,
-    power,
-    Prm.MinPassDist))
-  {     
-    //add some noise to the kick
-    BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
-
-    Vector2D KickDirection = BallTarget - player->Ball()->Pos();
-    player->Ball()->Kick(KickDirection, power);
-
-    #ifdef PLAYER_STATE_INFO_ON
-    debug_con << "Player " << player->ID() << " passes the ball off boards with force " << power << "  to player " 
-              << receiver->ID() << "  Target is " << BallTarget << "";
-    #endif
-    
-    //let the receiver know a pass is coming 
-    Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY, player->ID(), receiver->ID(),
-                            Msg_ReceiveBall, &BallTarget);                            
-   
-    //the player should wait at his current position unless instruced
-    //otherwise  
-    player->GetFSM()->ChangeState(BlazersWait::Instance());
-    player->FindSupport();
-    return;
-  }
-
-  // Attempt a pass to a player (original Buckland way)
 
   // If there are any potential candidates available to receive a pass, then pass
   if (player->isThreatened()  &&
@@ -608,13 +580,52 @@ void BlazersKickBall::Execute(FieldPlayer* player)
     return;
   }
 
-  //cannot shoot or pass, so dribble the ball upfield
-  else
-  {   
+
+  ////* 3) Attempt to pass to another player */
+  ////* ------------------------------------ */
+  //
+  //receiver = NULL; //if a receiver is found this will point to it
+
+  //// Attempt a pass to a player off the boards (Stealth move defender won't expect)
+
+  //// If there are any potential candidates available to receive a pass, then pass
+  //BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
+  //if (((fabs(player->Pos().y - 0) < 100) || (fabs(player->Pos().y - team->pitchMaxY) < 100)) &&
+  //  team->FindPassOffBoards(player,
+  //  receiver,
+  //  BallTarget,
+  //  power,
+  //  Prm.MinPassDist))
+  //{     
+  //  //add some noise to the kick
+  //  BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
+
+  //  Vector2D KickDirection = BallTarget - player->Ball()->Pos();
+  //  player->Ball()->Kick(KickDirection, power);
+
+  //  #ifdef PLAYER_STATE_INFO_ON
+  //  debug_con << "Player " << player->ID() << " passes the ball off boards with force " << power << "  to player " 
+  //            << receiver->ID() << "  Target is " << BallTarget << "";
+  //  #endif
+  //  
+  //  //let the receiver know a pass is coming 
+  //  Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY, player->ID(), receiver->ID(),
+  //                          Msg_ReceiveBall, &BallTarget);                            
+  // 
+  //  //the player should wait at his current position unless instruced
+  //  //otherwise  
+  //  player->GetFSM()->ChangeState(BlazersWait::Instance());
+  //  player->FindSupport();
+  //  return;
+  //}
+
+//cannot shoot or pass, so dribble the ball upfield
+//  else
+//  {   
     player->FindSupport();
 
     player->GetFSM()->ChangeState(BlazersDribble::Instance());
-  }   
+//  }   
 }
 
 

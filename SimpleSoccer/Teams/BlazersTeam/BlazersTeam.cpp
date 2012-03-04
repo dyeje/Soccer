@@ -39,6 +39,8 @@ BlazersTeam::BlazersTeam(Goal*        home_goal,
   goalYMin = ((pitch->cyClient()/2) - Prm.GoalWidth/2) + ballRadius;
   goalYMax = (pitch->cyClient()/2) + Prm.GoalWidth/2 - ballRadius;
   opponentGoalie = NULL;
+  pitchMinY = 0;
+  pitchMaxY = m_pPitch->cyClient();
 }
 
 
@@ -370,9 +372,12 @@ bool BlazersTeam::FindPassOffBoards(const PlayerBase*const passer,
                       double                 MinPassingDistance)const
 {
   double ClosestToGoalSoFar = MaxFloat;
-  double goalX = OpponentsGoal()->Center().x;
+  //double goalX = OpponentsGoal()->Center().x;
+  double goalX = m_pHomeGoal->Center().x;
   double passerX = passer->Pos().x;
+  double passerY = passer->Pos().y;
   double receiverX = 0.0;
+  double receiverY = 0.0;
   double dist2Goal;
   Vector2D wallTarget;
 
@@ -387,8 +392,13 @@ bool BlazersTeam::FindPassOffBoards(const PlayerBase*const passer,
     {
       // Receiver must be closer to goal than passer
       receiverX = (*curPlyr)->Pos().x;
-      if ((passerX > goalX && receiverX < passerX) ||
-        (passerX < goalX && receiverX > passerX))
+      receiverY = (*curPlyr)->Pos().y;
+      int absolutePasserX = fabs(goalX - passerX);
+      int absoluteReceiverX = fabs(goalX - receiverX);
+      if (absolutePasserX < absoluteReceiverX &&
+          fabs(passerY - receiverY) < 50 &&
+          fabs(passerX - receiverX) < 200
+        )
       {           
         // Determine if it's safe to pass and if the receiver can get
         // to the ball.
@@ -441,7 +451,7 @@ bool BlazersTeam::GetBestPassToReceiverOffBoards(const PlayerBase* const passer,
   double time = Pitch()->Ball()->TimeToCoverDistance(Pitch()->Ball()->Pos(),
                                                     PassTarget,
                                                     power);
-  time += Pitch()->Ball()->TimeToCoverDistance(Pitch()->Ball()->Pos(),
+  time += Pitch()->Ball()->TimeToCoverDistance(PassTarget,
                                               receiver->Pos(),
                                               power);
 
