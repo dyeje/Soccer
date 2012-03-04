@@ -25,9 +25,21 @@
 RedTeam     Attacking
 BlueTeam    Defending
 
-# CanShoot Test 1 & 2
+# Impv #x (CanShoot Test 1 & 2)
 #0       570    176  
 #9       544    156  ChaseBall
 #1       659    140  TendGoal    # Test1, goal at top
 #1       659    210  TendGoal   # Test2, goal at bottom
 
+# Impv #x (Pass off boards)
+# Red
+#9       100 72 ChaseBall
+#0       120 72
+#11      220 72 Wait 
+#12      18 280 Wait # Out of the way
+#14      38 280 Wait # Out of the way
+# Blue
+#6       160 72 Wait # Interpose players passing off boards
+#8       51 280 Wait # Out of the way
+#3       61 280 Wait # Out of the way
+#5       71 280 Wait # Out of the way

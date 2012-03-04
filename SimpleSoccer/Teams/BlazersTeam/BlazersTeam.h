@@ -54,16 +54,21 @@ public:
 	
   void UpdateTargetsOfWaitingPlayers()const;
 
-  // Override AbstSoccerTeam::CanShoot 
+  // Override AbstSoccerTeam::CanShoot (Improvement #)
   virtual bool CanShoot(Vector2D  BallPos,
                        double     power, 
                        Vector2D&  ShotTarget = Vector2D())const;
 
+  // New Methods (Improvement #)
   bool FindPassOffBoards(const PlayerBase*const passer,
                         PlayerBase*&            receiver,
                         Vector2D&               PassTarget,
                         double                  power,
                         double                  MinPassingDistance)const;
+  bool GetBestPassToReceiverOffBoards(const PlayerBase* const passer,
+                                      const PlayerBase* const receiver,
+                                      Vector2D&         PassTarget,
+                                      double            power)const;
 
 	double goalYMin;
 	double goalYMax;

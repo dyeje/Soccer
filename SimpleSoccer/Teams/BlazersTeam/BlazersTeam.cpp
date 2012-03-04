@@ -361,13 +361,144 @@ bool BlazersTeam::CanShoot(Vector2D  BallPos,
 }
 
 
+// Determines if an upfield pass off the boards can be made to another
+// team member in order to advance the ball towards the enemy goal
 bool BlazersTeam::FindPassOffBoards(const PlayerBase*const passer,
                       PlayerBase*&           receiver,
                       Vector2D&              PassTarget,
                       double                 power,
                       double                 MinPassingDistance)const
 {
-  return false;
+  double ClosestToGoalSoFar = MaxFloat;
+  double goalX = OpponentsGoal()->Center().x;
+  double passerX = passer->Pos().x;
+  double receiverX = 0.0;
+  double dist2Goal;
+  Vector2D wallTarget;
+
+  // Iterate through all this player's and calculate which one is both 
+  // in a position to be passed the ball off the boards, and if multiple
+  // players are, chose the one closest to the goal.  No backward passes
+  std::vector<PlayerBase*>::const_iterator curPlyr = Members().begin();
+  for (curPlyr; curPlyr != Members().end(); ++curPlyr)
+  {   
+    // Player must not be the one with the ball
+    if ((*curPlyr) != passer)                  
+    {
+      // Receiver must be closer to goal than passer
+      receiverX = (*curPlyr)->Pos().x;
+      if ((passerX > goalX && receiverX < passerX) ||
+        (passerX < goalX && receiverX > passerX))
+      {           
+        // Determine if it's safe to pass and if the receiver can get
+        // to the ball.
+
+        // Determine wallTarget (place on boards to shoot at)
+        if(passer->Pos().y < (m_pPitch->cyClient()/2))
+          wallTarget.y = 1;                     // Bank off top
+        else
+          wallTarget.y = m_pPitch->cyClient();  // Bank off bottom
+
+        double diff = fabs(passerX - receiverX)/2;
+        if(passerX > receiverX)
+          wallTarget.x = passerX - diff;
+        else
+          wallTarget.x = passerX + diff;
+
+        // Ensure it's good/safe to pass off wallTarget
+        if (GetBestPassToReceiverOffBoards(passer, *curPlyr, wallTarget, power))
+        {
+          // It's safe to pass to this receiver
+          dist2Goal = fabs(receiverX - goalX);
+          if (dist2Goal < ClosestToGoalSoFar)
+          {
+            // Best receiver thus far
+            ClosestToGoalSoFar = dist2Goal;
+            PassTarget = wallTarget;
+            receiver = *curPlyr;
+          }     
+        }
+      }
+    }
+  }//next team member
+
+  if (receiver) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
+
+bool BlazersTeam::GetBestPassToReceiverOffBoards(const PlayerBase* const passer,
+                                                 const PlayerBase* const receiver,
+                                                 Vector2D&         PassTarget,
+                                                 double            power)const
+{  
+  // Calculate how much time it will take for the ball to reach receiver, time
+  // to wall (Target) and time from there to receiver
+  double time = Pitch()->Ball()->TimeToCoverDistance(Pitch()->Ball()->Pos(),
+                                                    PassTarget,
+                                                    power);
+  time += Pitch()->Ball()->TimeToCoverDistance(Pitch()->Ball()->Pos(),
+                                              receiver->Pos(),
+                                              power);
+
+  // Return false if ball cannot reach the receiver 
+  if (time < 0) return false;
+
+  return true;  // Until logic below is constructed for a pass off boards
+
+  ////the maximum distance the receiver can cover in this time
+  //double InterceptRange = time * receiver->MaxSpeed();
+  //
+  ////Scale the intercept range
+  //const double ScalingFactor = 0.3;
+  //InterceptRange *= ScalingFactor;
+
+  ////now calculate the pass targets which are positioned at the intercepts
+  ////of the tangents from the ball to the receiver's range circle.
+  //Vector2D ip1, ip2;
+
+  //GetTangentPoints(receiver->Pos(),
+  //                 InterceptRange,
+  //                 Pitch()->Ball()->Pos(),
+  //                 ip1,
+  //                 ip2);
+ 
+  //const int NumPassesToTry = 3;
+  //Vector2D Passes[NumPassesToTry] = {ip1, receiver->Pos(), ip2};
+  //
+  //
+  //// this pass is the best found so far if it is:
+  ////
+  ////  1. Further upfield than the closest valid pass for this receiver
+  ////     found so far
+  ////  2. Within the playing area
+  ////  3. Cannot be intercepted by any opponents
+
+  //double ClosestSoFar = MaxFloat;
+  //bool  bResult      = false;
+
+  //for (int pass=0; pass<NumPassesToTry; ++pass)
+  //{    
+  //  double dist = fabs(Passes[pass].x - OpponentsGoal()->Center().x);
+
+  //  if (( dist < ClosestSoFar) &&
+  //      Pitch()->PlayingArea()->Inside(Passes[pass]) &&
+  //      isPassSafeFromAllOpponents(Pitch()->Ball()->Pos(),
+  //                                 Passes[pass],
+  //                                 receiver,
+  //                                 power))
+  //      
+  //  {
+  //    ClosestSoFar = dist;
+  //    PassTarget   = Passes[pass];
+  //    bResult      = true;
+  //  }
+  //}
+  //
+  //return bResult;
+}
 
