@@ -190,19 +190,22 @@ void Prior__ChaseBall::Execute(FieldPlayer* player)
     
     return;
   }
-                                                                              
+
+  // Default to chase ball, a mutch better defense
+  player->Steering()->SetTarget(player->Ball()->Pos());
+
   //if the player is the closest player to the ball then he should keep
   //chasing it
-  if (player->isClosestTeamMemberToBall())
-  {
-    player->Steering()->SetTarget(player->Ball()->Pos());
+  //if (player->isClosestTeamMemberToBall())
+  //{
+    //player->Steering()->SetTarget(player->Ball()->Pos());
 
-    return;
-  }
+    //return;
+  //}
   
   //if the player is not closest to the ball anymore, he should return back
   //to his home region and wait for another opportunity
-  player->GetFSM()->ChangeState(Prior__ReturnToHomeRegion::Instance());
+  //player->GetFSM()->ChangeState(Prior__ReturnToHomeRegion::Instance());
 }
 
 
@@ -428,6 +431,12 @@ void Prior__Wait::Execute(FieldPlayer* player)
      return;
    }
   } 
+
+  if (!player->Team()->InControl())
+  {
+    player->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
+  }
+
 }
 
 void Prior__Wait::Exit(FieldPlayer* player){}
@@ -464,6 +473,10 @@ void Prior__KickBall::Enter(FieldPlayer* player)
 
 void Prior__KickBall::Execute(FieldPlayer* player)
 { 
+  // Two types of Kicks are evaluated in order of importance: Shoot on 
+  // goal and pass.  Perform them if possible, and if not, default to 
+  // dribble.
+
   //calculate the dot product of the vector pointing to the ball
   //and the player's heading
   Vector2D ToBall = player->Ball()->Pos() - player->Pos();
@@ -485,7 +498,8 @@ void Prior__KickBall::Execute(FieldPlayer* player)
     return;
   }
 
-  /* Attempt a shot at the goal */
+  /* 1) Attempt a shot at the goal */
+  /* ----------------------------- */
 
   //if a shot is possible, this vector will hold the position along the 
   //opponent's goal line the player should aim for.
@@ -525,25 +539,13 @@ void Prior__KickBall::Execute(FieldPlayer* player)
    return;
  }
 
-  // /* Attempt a pass to a player off the boards */
-  // /* Stealth move defender would not expect    */
-  // if (player->Team()->FindPassOffBoards(player,
-  //                                     receiver,
-  //                                     BallTarget,
-  //                                     power,
-  //                                     Prm.MinPassDist))
-  // {     
-  //   assert(false);
-  // }
+ 
+  // 2) Attempt a pass to a player (original Buckland way)
 
-  /* Attempt a pass to a player (original way) */
-
-  //if a receiver is found this will point to it
-  PlayerBase* receiver = NULL;
-
+  PlayerBase* receiver = NULL; //if a receiver is found this will point to it
   power = Prm.MaxPassingForce * dot;
-  
-  //test if there are any potential candidates available to receive a pass
+
+  // If there are any potential candidates available to receive a pass, then pass
   if (player->isThreatened()  &&
       player->Team()->FindPass(player,
                               receiver,
@@ -581,13 +583,52 @@ void Prior__KickBall::Execute(FieldPlayer* player)
     return;
   }
 
-  //cannot shoot or pass, so dribble the ball upfield
-  else
-  {   
+
+  ////* 3) Attempt to pass to another player */
+  ////* ------------------------------------ */
+  //
+  //receiver = NULL; //if a receiver is found this will point to it
+
+  //// Attempt a pass to a player off the boards (Stealth move defender won't expect)
+
+  //// If there are any potential candidates available to receive a pass, then pass
+  //Prior__Team* team = static_cast<Prior__Team*>(player->Team());
+  //if (((fabs(player->Pos().y - 0) < 100) || (fabs(player->Pos().y - team->pitchMaxY) < 100)) &&
+  //  team->FindPassOffBoards(player,
+  //  receiver,
+  //  BallTarget,
+  //  power,
+  //  Prm.MinPassDist))
+  //{     
+  //  //add some noise to the kick
+  //  BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
+
+  //  Vector2D KickDirection = BallTarget - player->Ball()->Pos();
+  //  player->Ball()->Kick(KickDirection, power);
+
+  //  #ifdef PLAYER_STATE_INFO_ON
+  //  debug_con << "Player " << player->ID() << " passes the ball off boards with force " << power << "  to player " 
+  //            << receiver->ID() << "  Target is " << BallTarget << "";
+  //  #endif
+  //  
+  //  //let the receiver know a pass is coming 
+  //  Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY, player->ID(), receiver->ID(),
+  //                          Msg_ReceiveBall, &BallTarget);                            
+  // 
+  //  //the player should wait at his current position unless instruced
+  //  //otherwise  
+  //  player->GetFSM()->ChangeState(Prior__Wait::Instance());
+  //  player->FindSupport();
+  //  return;
+  //}
+
+//cannot shoot or pass, so dribble the ball upfield
+//  else
+//  {   
     player->FindSupport();
 
     player->GetFSM()->ChangeState(Prior__Dribble::Instance());
-  }   
+//  }   
 }
 
 

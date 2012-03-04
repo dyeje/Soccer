@@ -202,7 +202,7 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
 
     //return;
   //}
-  
+    
   //if the player is not closest to the ball anymore, he should return back
   //to his home region and wait for another opportunity
   //player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance());
