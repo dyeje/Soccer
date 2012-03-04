@@ -190,19 +190,22 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
     
     return;
   }
-                                                                              
+
+  // Default to chase ball, a mutch better defense
+  player->Steering()->SetTarget(player->Ball()->Pos());
+
   //if the player is the closest player to the ball then he should keep
   //chasing it
-  if (player->isClosestTeamMemberToBall())
-  {
-    player->Steering()->SetTarget(player->Ball()->Pos());
+  //if (player->isClosestTeamMemberToBall())
+  //{
+    //player->Steering()->SetTarget(player->Ball()->Pos());
 
-    return;
-  }
+    //return;
+  //}
   
   //if the player is not closest to the ball anymore, he should return back
   //to his home region and wait for another opportunity
-  player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance());
+  //player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance());
 }
 
 
