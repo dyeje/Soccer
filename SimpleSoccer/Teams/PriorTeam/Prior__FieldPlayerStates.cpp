@@ -4,6 +4,8 @@
 #include "../../FieldPlayer.h"
 #include "../../SteeringBehaviors.h"
 #include "Prior__Team.h"
+#include "Prior__FieldPlayer.h"
+#include "Prior__States.h"
 #include "../../Goal.h"
 #include "2D/geometry.h"
 #include "../../SoccerBall.h"
@@ -47,6 +49,7 @@ void Prior__GlobalPlayerState::Execute(FieldPlayer* player)
 
 bool Prior__GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 {
+
   switch(telegram.Msg)
   {
   case Msg_ReceiveBall:
@@ -202,7 +205,7 @@ void Prior__ChaseBall::Execute(FieldPlayer* player)
 
     //return;
   //}
-  
+    
   //if the player is not closest to the ball anymore, he should return back
   //to his home region and wait for another opportunity
   //player->GetFSM()->ChangeState(Prior__ReturnToHomeRegion::Instance());
@@ -406,6 +409,10 @@ void Prior__Wait::Execute(FieldPlayer* player)
     player->TrackBall();
   }
 
+  //Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  //if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+  //  player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+
   //if this player's team is controlling AND this player is not the attacker
   //AND is further up the field than the attacker he should request a pass.
   if ( player->Team()->InControl()    &&
@@ -432,7 +439,9 @@ void Prior__Wait::Execute(FieldPlayer* player)
    }
   } 
 
-  if (!player->Team()->InControl())
+  // Improvement #5, active defense.
+  if (!player->Team()->InControl() && 
+      !player->Team()->GetFSM()->isInState(*Prior__PrepareForKickOff::Instance()))
   {
     player->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
   }
@@ -781,7 +790,24 @@ void Prior__ReceiveBall::Exit(FieldPlayer* player)
 
 
 
- 
-
-
+//
+//Prior__DefenseMeister* Prior__DefenseMeister::Instance()
+//{
+//  static Prior__DefenseMeister instance;
+//  return &instance;
+//}
+//
+//
+//void Prior__DefenseMeister::Enter(FieldPlayer* player)
+//{
+//}
+//
+//void Prior__DefenseMeister::Execute(FieldPlayer* player)
+//{
+//}
+//
+//void Prior__DefenseMeister::Exit(FieldPlayer* player)
+//{
+//}
+//
 
