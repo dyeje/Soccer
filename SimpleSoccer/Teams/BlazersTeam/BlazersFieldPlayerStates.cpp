@@ -4,6 +4,8 @@
 #include "../../FieldPlayer.h"
 #include "../../SteeringBehaviors.h"
 #include "BlazersTeam.h"
+#include "BlazersFieldPlayer.h"
+#include "BlazersStates.h"
 #include "../../Goal.h"
 #include "2D/geometry.h"
 #include "../../SoccerBall.h"
@@ -47,6 +49,7 @@ void BlazersGlobalPlayerState::Execute(FieldPlayer* player)
 
 bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 {
+
   switch(telegram.Msg)
   {
   case Msg_ReceiveBall:
@@ -406,6 +409,10 @@ void BlazersWait::Execute(FieldPlayer* player)
     player->TrackBall();
   }
 
+  BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+  if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+    player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+
   //if this player's team is controlling AND this player is not the attacker
   //AND is further up the field than the attacker he should request a pass.
   if ( player->Team()->InControl()    &&
@@ -432,7 +439,9 @@ void BlazersWait::Execute(FieldPlayer* player)
    }
   } 
 
-  if (!player->Team()->InControl())
+  // Improvement #5, active defense.
+  if (!player->Team()->InControl() && 
+      !player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance()))
   {
     player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
   }
@@ -781,7 +790,24 @@ void BlazersReceiveBall::Exit(FieldPlayer* player)
 
 
 
- 
 
+BlazersDefenseMeister* BlazersDefenseMeister::Instance()
+{
+  static BlazersDefenseMeister instance;
+  return &instance;
+}
+
+
+void BlazersDefenseMeister::Enter(FieldPlayer* player)
+{
+}
+
+void BlazersDefenseMeister::Execute(FieldPlayer* player)
+{
+}
+
+void BlazersDefenseMeister::Exit(FieldPlayer* player)
+{
+}
 
 
