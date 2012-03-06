@@ -44,6 +44,7 @@ BlazersFieldPlayer::BlazersFieldPlayer(AbstSoccerTeam* home_team,
                                                     scale,
                                                     role)                                    
 {
+  init_start_state = start_state;
 }
 
 void BlazersFieldPlayer::ForcePosition(double x, double y) {

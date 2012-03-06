@@ -70,12 +70,16 @@ public:
                                       Vector2D&         PassTarget,
                                       double            power)const;
 
+  void SetBlazersGoalie(PlayerBase* player);
+  PlayerBase* GetBlazersGoalie();
+
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
   int pitchMinY;
   int pitchMaxY;
 	PlayerBase* opponentGoalie;
+	PlayerBase* blazersGoalie;
 };
 
 #endif

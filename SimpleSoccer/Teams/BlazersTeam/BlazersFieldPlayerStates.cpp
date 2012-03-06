@@ -352,14 +352,31 @@ void BlazersReturnToHomeRegion::Execute(FieldPlayer* player)
   //home region
   else if(!player->Pitch()->GameOn() && player->AtTarget())
   {
-    player->GetFSM()->ChangeState(BlazersWait::Instance());
+    // Doing the following cuases the defense meister to not enter wait,
+    // and the game pauses with all the other players in the home region -
+    // the prep for kick off must require they all be in wait state to start
+    //
+    // If player is designated defense meister, place them back in that
+    // state instead of wait.
+    BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+    if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) &&
+        !player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance()) )
+      player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+    else
+      player->GetFSM()->ChangeState(BlazersWait::Instance());
   }
 }
 
 void BlazersReturnToHomeRegion::Exit(FieldPlayer* player)
 {
-  player->Steering()->ArriveOff();
-}
+  // player->Steering()->ArriveOff();
+  // If player is designated defense meister, place them back in that state
+  // BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+  // if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+  //   player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+  // else
+    player->Steering()->ArriveOff();
+ }
 
 
 
@@ -800,10 +817,18 @@ BlazersDefenseMeister* BlazersDefenseMeister::Instance()
 
 void BlazersDefenseMeister::Enter(FieldPlayer* player)
 {
+  // Interpose between goalie and ball
+  BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
+  player->Steering()->InterposeOn(60);
+  player->Steering()->SetTarget(team->GetBlazersGoalie()->Pos());
 }
 
 void BlazersDefenseMeister::Execute(FieldPlayer* player)
 {
+  //the rear interpose target will change as the ball's position changes
+  //so it must be updated each update-step 
+  BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
+  player->Steering()->SetTarget(team->GetBlazersGoalie()->Pos());
 }
 
 void BlazersDefenseMeister::Exit(FieldPlayer* player)

@@ -116,26 +116,38 @@ void BlazersTeam::InitPlayers()
 
  }
 
+void BlazersTeam::SetBlazersGoalie(PlayerBase* player) {
+  blazersGoalie = player;
+}  
+PlayerBase* BlazersTeam::GetBlazersGoalie() {
+  return blazersGoalie;
+}
+
 //------------------------- CreatePlayers --------------------------------
 //
 //  creates the players
 //------------------------------------------------------------------------
 void BlazersTeam::CreatePlayers()
 {
+  BlazersGoalKeeper* goalie;
+
   if (Color() == blue) {
     
 	  // Create Blue players
-    m_Players.push_back(new BlazersGoalKeeper(this,
+    goalie = new BlazersGoalKeeper(this,
                                1,
                                BlazersTendGoal::Instance(),
-							   BlazersGlobalKeeperState::Instance(),
+                               BlazersGlobalKeeperState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale));
+                               Prm.PlayerScale);
+
+    m_Players.push_back(goalie);
+    SetBlazersGoalie(goalie);
  
     m_Players.push_back(new BlazersFieldPlayer(this,
                                6,
@@ -180,12 +192,12 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale,
-                               PlayerBase::defender));
+                               PlayerBase::attacker));
 
 
         m_Players.push_back(new BlazersFieldPlayer(this,
                                5,
-                               BlazersWait::Instance(),
+                               BlazersDefenseMeister::Instance(),
                                BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
@@ -201,7 +213,7 @@ void BlazersTeam::CreatePlayers()
   else
   {
 	  // Create Red players
-    m_Players.push_back(new BlazersGoalKeeper(this,
+    goalie = new BlazersGoalKeeper(this,
                                16,
                                BlazersTendGoal::Instance(),
                                BlazersGlobalKeeperState::Instance(),
@@ -211,7 +223,10 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale));
+                               Prm.PlayerScale);
+
+    m_Players.push_back(goalie);
+    SetBlazersGoalie(goalie);
 
     m_Players.push_back(new BlazersFieldPlayer(this,
                                9,
@@ -252,12 +267,12 @@ void BlazersTeam::CreatePlayers()
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale,
-                               PlayerBase::defender));
+                               PlayerBase::attacker));
 
 
     m_Players.push_back(new BlazersFieldPlayer(this,
                                14,
-                               BlazersWait::Instance(),
+                               BlazersDefenseMeister::Instance(),
                                BlazersGlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),
