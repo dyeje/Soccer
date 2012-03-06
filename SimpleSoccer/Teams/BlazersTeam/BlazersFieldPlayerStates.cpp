@@ -49,7 +49,6 @@ void BlazersGlobalPlayerState::Execute(FieldPlayer* player)
 
 bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 {
-
   switch(telegram.Msg)
   {
   case Msg_ReceiveBall:
@@ -67,6 +66,10 @@ bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
 
   case Msg_SupportAttacker:
     {
+      BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+      if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+        return true;
+
       //if already supporting just return
       if (player->GetFSM()->isInState(*BlazersSupportAttacker::Instance()))
       {
@@ -194,6 +197,12 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
     return;
   }
 
+  BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+  if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
+    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337 ) //plyr->Pitch()->cxClient()/2 )
+    //&& player->Team()->InControl() )
+    player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+
   // Default to chase ball, a mutch better defense
   player->Steering()->SetTarget(player->Ball()->Pos());
 
@@ -247,6 +256,10 @@ void BlazersSupportAttacker::Execute(FieldPlayer* player)
   {
     player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance()); return;
   } 
+  //BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+  //if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
+  //  && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > plyr->Pitch()->cxClient() / 2 )
+  //  player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
 
 
   //if the best supporting spot changes, change the steering target
@@ -358,11 +371,11 @@ void BlazersReturnToHomeRegion::Execute(FieldPlayer* player)
     //
     // If player is designated defense meister, place them back in that
     // state instead of wait.
-    BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
-    if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) &&
-        !player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance()) )
-      player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
-    else
+    //BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+    //if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) &&
+    //    !player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance()) )
+    //  player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+    //else
       player->GetFSM()->ChangeState(BlazersWait::Instance());
   }
 }
@@ -427,8 +440,9 @@ void BlazersWait::Execute(FieldPlayer* player)
   }
 
   BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
-  if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
-    player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+  if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14
+    && (!player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance())) )
+      player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
 
   //if this player's team is controlling AND this player is not the attacker
   //AND is further up the field than the attacker he should request a pass.
@@ -499,6 +513,9 @@ void BlazersKickBall::Enter(FieldPlayer* player)
 
 void BlazersKickBall::Execute(FieldPlayer* player)
 { 
+  BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
+  bool defenseMeister = (plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14);
+
   // Two types of Kicks are evaluated in order of importance: Shoot on 
   // goal and pass.  Perform them if possible, and if not, default to 
   // dribble.
@@ -558,7 +575,11 @@ void BlazersKickBall::Execute(FieldPlayer* player)
    player->Ball()->Kick(KickDirection, power);
     
    //change state   
-   player->GetFSM()->ChangeState(BlazersWait::Instance());
+   //player->GetFSM()->ChangeState(BlazersWait::Instance());
+    if(defenseMeister)
+      player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+    else
+      player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
    
    player->FindSupport();
   
@@ -572,12 +593,20 @@ void BlazersKickBall::Execute(FieldPlayer* player)
   power = Prm.MaxPassingForce * dot;
 
   // If there are any potential candidates available to receive a pass, then pass
-  if (player->isThreatened()  &&
-      player->Team()->FindPass(player,
+  bool findPass = player->Team()->FindPass(player,
                               receiver,
                               BallTarget,
                               power,
-                              Prm.MinPassDist))
+                              Prm.MinPassDist);
+  bool passBall = (findPass && (defenseMeister || player->isThreatened())); 
+
+  if(passBall)
+  //if (player->isThreatened()  &&
+  //    player->Team()->FindPass(player,
+  //                            receiver,
+  //                            BallTarget,
+  //                            power,
+  //                            Prm.MinPassDist))
   {     
     //add some noise to the kick
     BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
@@ -602,59 +631,19 @@ void BlazersKickBall::Execute(FieldPlayer* player)
 
     //the player should wait at his current position unless instruced
     //otherwise  
-    player->GetFSM()->ChangeState(BlazersWait::Instance());
+    //player->GetFSM()->ChangeState(BlazersWait::Instance());
+    if(defenseMeister)
+      player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+    else
+      player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
 
     player->FindSupport();
 
     return;
   }
 
-
-  ////* 3) Attempt to pass to another player */
-  ////* ------------------------------------ */
-  //
-  //receiver = NULL; //if a receiver is found this will point to it
-
-  //// Attempt a pass to a player off the boards (Stealth move defender won't expect)
-
-  //// If there are any potential candidates available to receive a pass, then pass
-  //BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
-  //if (((fabs(player->Pos().y - 0) < 100) || (fabs(player->Pos().y - team->pitchMaxY) < 100)) &&
-  //  team->FindPassOffBoards(player,
-  //  receiver,
-  //  BallTarget,
-  //  power,
-  //  Prm.MinPassDist))
-  //{     
-  //  //add some noise to the kick
-  //  BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
-
-  //  Vector2D KickDirection = BallTarget - player->Ball()->Pos();
-  //  player->Ball()->Kick(KickDirection, power);
-
-  //  #ifdef PLAYER_STATE_INFO_ON
-  //  debug_con << "Player " << player->ID() << " passes the ball off boards with force " << power << "  to player " 
-  //            << receiver->ID() << "  Target is " << BallTarget << "";
-  //  #endif
-  //  
-  //  //let the receiver know a pass is coming 
-  //  Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY, player->ID(), receiver->ID(),
-  //                          Msg_ReceiveBall, &BallTarget);                            
-  // 
-  //  //the player should wait at his current position unless instruced
-  //  //otherwise  
-  //  player->GetFSM()->ChangeState(BlazersWait::Instance());
-  //  player->FindSupport();
-  //  return;
-  //}
-
-//cannot shoot or pass, so dribble the ball upfield
-//  else
-//  {   
-    player->FindSupport();
-
-    player->GetFSM()->ChangeState(BlazersDribble::Instance());
-//  }   
+  player->FindSupport();
+  player->GetFSM()->ChangeState(BlazersDribble::Instance());
 }
 
 
@@ -818,17 +807,28 @@ BlazersDefenseMeister* BlazersDefenseMeister::Instance()
 void BlazersDefenseMeister::Enter(FieldPlayer* player)
 {
   // Interpose between goalie and ball
-  BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
-  player->Steering()->InterposeOn(60);
-  player->Steering()->SetTarget(team->GetBlazersGoalie()->Pos());
+  double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
+  player->Steering()->InterposeOn(interpose);
+
+  const Vector2D *target = new Vector2D(player->Team()->HomeGoal()->Center().x, 
+                                player->Team()->HomeGoal()->Center().y);
+  player->Steering()->SetTarget(*target);
 }
 
 void BlazersDefenseMeister::Execute(FieldPlayer* player)
 {
-  //the rear interpose target will change as the ball's position changes
-  //so it must be updated each update-step 
-  BlazersTeam* team = static_cast<BlazersTeam*>(player->Team());
-  player->Steering()->SetTarget(team->GetBlazersGoalie()->Pos());
+  if(Vec2DDistance(player->Pos(), player->Ball()->Pos()) < 100 &&
+    player->Ball()->Pos().x > 350) {
+    player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
+  }
+  else {
+    double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
+    player->Steering()->InterposeOn(interpose);
+
+    const Vector2D *target = new Vector2D(player->Team()->HomeGoal()->Center().x, 
+                                  player->Team()->HomeGoal()->Center().y);
+    player->Steering()->SetTarget(*target);
+  }
 }
 
 void BlazersDefenseMeister::Exit(FieldPlayer* player)
