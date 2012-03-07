@@ -159,7 +159,6 @@ bool Prior__GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
     }
 
     break;
-
   }//end switch
 
   return false;
@@ -593,20 +592,20 @@ void Prior__KickBall::Execute(FieldPlayer* player)
   power = Prm.MaxPassingForce * dot;
 
   // If there are any potential candidates available to receive a pass, then pass
-  bool findPass = player->Team()->FindPass(player,
-                              receiver,
-                              BallTarget,
-                              power,
-                              Prm.MinPassDist);
-  bool passBall = (findPass && (defenseMeister || player->isThreatened())); 
-
-  if(passBall)
-  //if (player->isThreatened()  &&
-  //    player->Team()->FindPass(player,
+  //bool findPass = player->Team()->FindPass(player,
   //                            receiver,
   //                            BallTarget,
   //                            power,
-  //                            Prm.MinPassDist))
+  //                            Prm.MinPassDist);
+  //bool passBall = (findPass && (defenseMeister || player->isThreatened())); 
+
+  //if(passBall)
+  if (player->isThreatened()  &&
+      player->Team()->FindPass(player,
+                              receiver,
+                              BallTarget,
+                              power,
+                              Prm.MinPassDist))
   {     
     //add some noise to the kick
     BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
