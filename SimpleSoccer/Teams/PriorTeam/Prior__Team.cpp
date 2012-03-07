@@ -116,26 +116,38 @@ void Prior__Team::InitPlayers()
 
  }
 
+void Prior__Team::SetPrior__Goalie(PlayerBase* player) {
+  Prior__Goalie = player;
+}  
+PlayerBase* Prior__Team::GetPrior__Goalie() {
+  return Prior__Goalie;
+}
+
 //------------------------- CreatePlayers --------------------------------
 //
 //  creates the players
 //------------------------------------------------------------------------
 void Prior__Team::CreatePlayers()
 {
+  Prior__GoalKeeper* goalie;
+
   if (Color() == blue) {
     
 	  // Create Blue players
-    m_Players.push_back(new Prior__GoalKeeper(this,
+    goalie = new Prior__GoalKeeper(this,
                                1,
                                Prior__TendGoal::Instance(),
-							   Prior__GlobalKeeperState::Instance(),
+                               Prior__GlobalKeeperState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
                                Prm.PlayerMass,
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale));
+                               Prm.PlayerScale);
+
+    m_Players.push_back(goalie);
+    SetPrior__Goalie(goalie);
  
     m_Players.push_back(new Prior__FieldPlayer(this,
                                6,
@@ -180,12 +192,12 @@ void Prior__Team::CreatePlayers()
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale,
-                               PlayerBase::defender));
+                               PlayerBase::attacker));
 
 
         m_Players.push_back(new Prior__FieldPlayer(this,
                                5,
-                               Prior__Wait::Instance(),
+                               Prior__DefenseMeister::Instance(),
                                Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,1),
                                Vector2D(0.0, 0.0),
@@ -201,7 +213,7 @@ void Prior__Team::CreatePlayers()
   else
   {
 	  // Create Red players
-    m_Players.push_back(new Prior__GoalKeeper(this,
+    goalie = new Prior__GoalKeeper(this,
                                16,
                                Prior__TendGoal::Instance(),
                                Prior__GlobalKeeperState::Instance(),
@@ -211,7 +223,10 @@ void Prior__Team::CreatePlayers()
                                Prm.PlayerMaxForce,
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
-                               Prm.PlayerScale));
+                               Prm.PlayerScale);
+
+    m_Players.push_back(goalie);
+    SetPrior__Goalie(goalie);
 
     m_Players.push_back(new Prior__FieldPlayer(this,
                                9,
@@ -252,12 +267,12 @@ void Prior__Team::CreatePlayers()
                                Prm.PlayerMaxSpeedWithoutBall,
                                Prm.PlayerMaxTurnRate,
                                Prm.PlayerScale,
-                               PlayerBase::defender));
+                               PlayerBase::attacker));
 
 
     m_Players.push_back(new Prior__FieldPlayer(this,
                                14,
-                               Prior__Wait::Instance(),
+                               Prior__DefenseMeister::Instance(),
                                Prior__GlobalPlayerState::Instance(),
                                Vector2D(0,-1),
                                Vector2D(0.0, 0.0),

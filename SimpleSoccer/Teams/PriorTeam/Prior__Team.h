@@ -70,12 +70,16 @@ public:
                                       Vector2D&         PassTarget,
                                       double            power)const;
 
+  void SetPrior__Goalie(PlayerBase* player);
+  PlayerBase* GetPrior__Goalie();
+
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
   int pitchMinY;
   int pitchMaxY;
 	PlayerBase* opponentGoalie;
+	PlayerBase* Prior__Goalie;
 };
 
 #endif

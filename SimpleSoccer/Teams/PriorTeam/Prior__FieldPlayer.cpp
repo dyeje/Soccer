@@ -44,6 +44,7 @@ Prior__FieldPlayer::Prior__FieldPlayer(AbstSoccerTeam* home_team,
                                                     scale,
                                                     role)                                    
 {
+  init_start_state = start_state;
 }
 
 void Prior__FieldPlayer::ForcePosition(double x, double y) {

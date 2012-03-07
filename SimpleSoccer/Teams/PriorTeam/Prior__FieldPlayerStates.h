@@ -192,8 +192,26 @@ public:
   bool OnMessage(FieldPlayer*, const Telegram&){return false;}
 };
 
-
-
-
+//------------------------------------------------------------------------
+class Prior__DefenseMeister: public State<FieldPlayer>
+{
+private:
   
+  Prior__DefenseMeister(){}
+
+public:
+
+  //this is a singleton
+  static Prior__DefenseMeister* Instance();
+
+  void Enter(FieldPlayer* player);
+
+  void Execute(FieldPlayer* player);
+
+  void Exit(FieldPlayer* player);
+
+  bool OnMessage(FieldPlayer*, const Telegram&){return false;}
+};
+
+ 
 #endif

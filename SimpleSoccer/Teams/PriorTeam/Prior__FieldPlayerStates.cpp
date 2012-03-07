@@ -49,7 +49,6 @@ void Prior__GlobalPlayerState::Execute(FieldPlayer* player)
 
 bool Prior__GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& telegram)
 {
-
   switch(telegram.Msg)
   {
   case Msg_ReceiveBall:
@@ -67,6 +66,10 @@ bool Prior__GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
 
   case Msg_SupportAttacker:
     {
+      Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+      if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+        return true;
+
       //if already supporting just return
       if (player->GetFSM()->isInState(*Prior__SupportAttacker::Instance()))
       {
@@ -194,6 +197,12 @@ void Prior__ChaseBall::Execute(FieldPlayer* player)
     return;
   }
 
+  Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
+    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337 ) //plyr->Pitch()->cxClient()/2 )
+    //&& player->Team()->InControl() )
+    player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+
   // Default to chase ball, a mutch better defense
   player->Steering()->SetTarget(player->Ball()->Pos());
 
@@ -247,6 +256,10 @@ void Prior__SupportAttacker::Execute(FieldPlayer* player)
   {
     player->GetFSM()->ChangeState(Prior__ReturnToHomeRegion::Instance()); return;
   } 
+  //Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  //if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
+  //  && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > plyr->Pitch()->cxClient() / 2 )
+  //  player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
 
 
   //if the best supporting spot changes, change the steering target
@@ -352,14 +365,31 @@ void Prior__ReturnToHomeRegion::Execute(FieldPlayer* player)
   //home region
   else if(!player->Pitch()->GameOn() && player->AtTarget())
   {
-    player->GetFSM()->ChangeState(Prior__Wait::Instance());
+    // Doing the following cuases the defense meister to not enter wait,
+    // and the game pauses with all the other players in the home region -
+    // the prep for kick off must require they all be in wait state to start
+    //
+    // If player is designated defense meister, place them back in that
+    // state instead of wait.
+    //Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+    //if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) &&
+    //    !player->Team()->GetFSM()->isInState(*Prior__PrepareForKickOff::Instance()) )
+    //  player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+    //else
+      player->GetFSM()->ChangeState(Prior__Wait::Instance());
   }
 }
 
 void Prior__ReturnToHomeRegion::Exit(FieldPlayer* player)
 {
-  player->Steering()->ArriveOff();
-}
+  // player->Steering()->ArriveOff();
+  // If player is designated defense meister, place them back in that state
+  // Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  // if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+  //   player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+  // else
+    player->Steering()->ArriveOff();
+ }
 
 
 
@@ -409,9 +439,10 @@ void Prior__Wait::Execute(FieldPlayer* player)
     player->TrackBall();
   }
 
-  //Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
-  //if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
-  //  player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+  Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14
+    && (!player->Team()->GetFSM()->isInState(*Prior__PrepareForKickOff::Instance())) )
+      player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
 
   //if this player's team is controlling AND this player is not the attacker
   //AND is further up the field than the attacker he should request a pass.
@@ -482,6 +513,9 @@ void Prior__KickBall::Enter(FieldPlayer* player)
 
 void Prior__KickBall::Execute(FieldPlayer* player)
 { 
+  Prior__FieldPlayer* plyr = static_cast<Prior__FieldPlayer*>(player);
+  bool defenseMeister = (plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14);
+
   // Two types of Kicks are evaluated in order of importance: Shoot on 
   // goal and pass.  Perform them if possible, and if not, default to 
   // dribble.
@@ -541,7 +575,11 @@ void Prior__KickBall::Execute(FieldPlayer* player)
    player->Ball()->Kick(KickDirection, power);
     
    //change state   
-   player->GetFSM()->ChangeState(Prior__Wait::Instance());
+   //player->GetFSM()->ChangeState(Prior__Wait::Instance());
+    if(defenseMeister)
+      player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+    else
+      player->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
    
    player->FindSupport();
   
@@ -555,12 +593,20 @@ void Prior__KickBall::Execute(FieldPlayer* player)
   power = Prm.MaxPassingForce * dot;
 
   // If there are any potential candidates available to receive a pass, then pass
-  if (player->isThreatened()  &&
-      player->Team()->FindPass(player,
+  bool findPass = player->Team()->FindPass(player,
                               receiver,
                               BallTarget,
                               power,
-                              Prm.MinPassDist))
+                              Prm.MinPassDist);
+  bool passBall = (findPass && (defenseMeister || player->isThreatened())); 
+
+  if(passBall)
+  //if (player->isThreatened()  &&
+  //    player->Team()->FindPass(player,
+  //                            receiver,
+  //                            BallTarget,
+  //                            power,
+  //                            Prm.MinPassDist))
   {     
     //add some noise to the kick
     BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
@@ -585,59 +631,19 @@ void Prior__KickBall::Execute(FieldPlayer* player)
 
     //the player should wait at his current position unless instruced
     //otherwise  
-    player->GetFSM()->ChangeState(Prior__Wait::Instance());
+    //player->GetFSM()->ChangeState(Prior__Wait::Instance());
+    if(defenseMeister)
+      player->GetFSM()->ChangeState(Prior__DefenseMeister::Instance());
+    else
+      player->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
 
     player->FindSupport();
 
     return;
   }
 
-
-  ////* 3) Attempt to pass to another player */
-  ////* ------------------------------------ */
-  //
-  //receiver = NULL; //if a receiver is found this will point to it
-
-  //// Attempt a pass to a player off the boards (Stealth move defender won't expect)
-
-  //// If there are any potential candidates available to receive a pass, then pass
-  //Prior__Team* team = static_cast<Prior__Team*>(player->Team());
-  //if (((fabs(player->Pos().y - 0) < 100) || (fabs(player->Pos().y - team->pitchMaxY) < 100)) &&
-  //  team->FindPassOffBoards(player,
-  //  receiver,
-  //  BallTarget,
-  //  power,
-  //  Prm.MinPassDist))
-  //{     
-  //  //add some noise to the kick
-  //  BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
-
-  //  Vector2D KickDirection = BallTarget - player->Ball()->Pos();
-  //  player->Ball()->Kick(KickDirection, power);
-
-  //  #ifdef PLAYER_STATE_INFO_ON
-  //  debug_con << "Player " << player->ID() << " passes the ball off boards with force " << power << "  to player " 
-  //            << receiver->ID() << "  Target is " << BallTarget << "";
-  //  #endif
-  //  
-  //  //let the receiver know a pass is coming 
-  //  Dispatcher->DispatchMsg(SEND_MSG_IMMEDIATELY, player->ID(), receiver->ID(),
-  //                          Msg_ReceiveBall, &BallTarget);                            
-  // 
-  //  //the player should wait at his current position unless instruced
-  //  //otherwise  
-  //  player->GetFSM()->ChangeState(Prior__Wait::Instance());
-  //  player->FindSupport();
-  //  return;
-  //}
-
-//cannot shoot or pass, so dribble the ball upfield
-//  else
-//  {   
-    player->FindSupport();
-
-    player->GetFSM()->ChangeState(Prior__Dribble::Instance());
-//  }   
+  player->FindSupport();
+  player->GetFSM()->ChangeState(Prior__Dribble::Instance());
 }
 
 
@@ -790,24 +796,43 @@ void Prior__ReceiveBall::Exit(FieldPlayer* player)
 
 
 
-//
-//Prior__DefenseMeister* Prior__DefenseMeister::Instance()
-//{
-//  static Prior__DefenseMeister instance;
-//  return &instance;
-//}
-//
-//
-//void Prior__DefenseMeister::Enter(FieldPlayer* player)
-//{
-//}
-//
-//void Prior__DefenseMeister::Execute(FieldPlayer* player)
-//{
-//}
-//
-//void Prior__DefenseMeister::Exit(FieldPlayer* player)
-//{
-//}
-//
+
+Prior__DefenseMeister* Prior__DefenseMeister::Instance()
+{
+  static Prior__DefenseMeister instance;
+  return &instance;
+}
+
+
+void Prior__DefenseMeister::Enter(FieldPlayer* player)
+{
+  // Interpose between goalie and ball
+  double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
+  player->Steering()->InterposeOn(interpose);
+
+  const Vector2D *target = new Vector2D(player->Team()->HomeGoal()->Center().x, 
+                                player->Team()->HomeGoal()->Center().y);
+  player->Steering()->SetTarget(*target);
+}
+
+void Prior__DefenseMeister::Execute(FieldPlayer* player)
+{
+  if(Vec2DDistance(player->Pos(), player->Ball()->Pos()) < 100 &&
+    player->Ball()->Pos().x > 350) {
+    player->GetFSM()->ChangeState(Prior__ChaseBall::Instance());
+  }
+  else {
+    double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
+    player->Steering()->InterposeOn(interpose);
+
+    const Vector2D *target = new Vector2D(player->Team()->HomeGoal()->Center().x, 
+                                  player->Team()->HomeGoal()->Center().y);
+    player->Steering()->SetTarget(*target);
+  }
+}
+
+void Prior__DefenseMeister::Exit(FieldPlayer* player)
+{
+}
+
 

@@ -38,7 +38,6 @@ Red: 2 (3.917) = 2.00, Blue: 7 (3.629) = 7.00
      32 (avg=4.9)    ,       44 (avg=4.2)
 ------- 
 Spike - Pass off Boards
-
 Red: 2 (4.187) = 2.00, Blue: 7 (3.918) = 7.00
 Red: 1 (4.104) = 1.00, Blue: 9 (3.820) = 9.00
 Red: 0 (4.129) = 0.00, Blue: 6 (3.892) = 6.00
@@ -49,3 +48,5 @@ Red: 0 (3.657) = 1.91, Blue: 4 (5.925) = 4.00
 Red: 1 (4.608) = 1.00, Blue: 9 (4.089) = 9.00
 Red: 3 (5.074) = 3.00, Blue: 3 (4.734) = 3.34
 Red: 2 (4.735) = 2.00, Blue: 10 (4.165) = 10.00
+-----
+Post Improvement 4.  Tweaked defense mesiter (red) against last defensemeister commit (blue)

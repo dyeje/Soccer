@@ -40,6 +40,8 @@ public:
   void ForcePosition(double x, double y);
   int HomeRegion();
 
+  State<FieldPlayer>* init_start_state;
+
 };
 
 #endif
