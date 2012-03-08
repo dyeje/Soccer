@@ -199,8 +199,8 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
 
   BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
   if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
-    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337 ) //plyr->Pitch()->cxClient()/2 )
-    //&& player->Team()->InControl() )
+    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337  //plyr->Pitch()->cxClient()/2 )
+    && player->Pitch()->GameOn() )
     player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
 
   // Default to chase ball, a mutch better defense
@@ -441,9 +441,11 @@ void BlazersWait::Execute(FieldPlayer* player)
   }
 
   BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
-  if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14
-    && (!player->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance())) )
+  if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
+    //&& ( !plyr->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance())) 
+    && plyr->Pitch()->GameOn() ) {
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
+  }
 
   //if this player's team is controlling AND this player is not the attacker
   //AND is further up the field than the attacker he should request a pass.
@@ -577,7 +579,7 @@ void BlazersKickBall::Execute(FieldPlayer* player)
     
    //change state   
    //player->GetFSM()->ChangeState(BlazersWait::Instance());
-    if(defenseMeister)
+    if(defenseMeister && player->Pitch()->GameOn())
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
     else
       player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
@@ -633,7 +635,7 @@ void BlazersKickBall::Execute(FieldPlayer* player)
     //the player should wait at his current position unless instruced
     //otherwise  
     //player->GetFSM()->ChangeState(BlazersWait::Instance());
-    if(defenseMeister)
+    if(defenseMeister && plyr->Pitch()->GameOn())
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
     else
       player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
