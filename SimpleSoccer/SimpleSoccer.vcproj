@@ -799,11 +799,11 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Common\iniFileLoaderBase.h"
+				RelativePath="..\Common\misc\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\Common\misc\iniFileLoaderBase.h"
+				RelativePath="..\Common\iniFileLoaderBase.h"
 				>
 			</File>
 			<File
@@ -1034,6 +1034,14 @@
 				</File>
 				<File
 					RelativePath=".\Teams\BlazersTeam\BlazersStates.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersSupportSpotCalculator.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\BlazersTeam\BlazersSupportSpotCalculator.h"
 					>
 				</File>
 				<File
