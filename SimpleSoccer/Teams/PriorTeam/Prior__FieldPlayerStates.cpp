@@ -77,7 +77,8 @@ bool Prior__GlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
       }
       
       //set the target to be the best supporting position
-      player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+      player->Steering()->SetTarget(static_cast<Prior__Team*>(player->Team())->GetSupportSpot());
+      // player->Steering()->SetTarget(player->Team()->GetSupportSpot());
 
       //change the state
       player->GetFSM()->ChangeState(Prior__SupportAttacker::Instance());
@@ -241,7 +242,7 @@ void Prior__SupportAttacker::Enter(FieldPlayer* player)
 {
   player->Steering()->ArriveOn();
 
-  player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+  player->Steering()->SetTarget(static_cast<Prior__Team*>(player->Team())->GetSupportSpot());
   
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters support state" << "";
@@ -262,9 +263,10 @@ void Prior__SupportAttacker::Execute(FieldPlayer* player)
 
 
   //if the best supporting spot changes, change the steering target
-  if (player->Team()->GetSupportSpot() != player->Steering()->Target())
+  Vector2D supportSpot = static_cast<Prior__Team*>(player->Team())->GetSupportSpot();
+  if (supportSpot != player->Steering()->Target())
   {    
-    player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+    player->Steering()->SetTarget(supportSpot);
 
     player->Steering()->ArriveOn();
   }

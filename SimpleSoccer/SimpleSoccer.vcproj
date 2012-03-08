@@ -1121,6 +1121,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Teams\PriorTeam\Prior__SupportSpotCalculator.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Teams\PriorTeam\Prior__SupportSpotCalculator.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Teams\PriorTeam\Prior__Team.cpp"
 					>
 				</File>

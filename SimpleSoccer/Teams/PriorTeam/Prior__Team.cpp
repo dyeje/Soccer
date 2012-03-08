@@ -31,7 +31,11 @@ Prior__Team::Prior__Team(Goal*        home_goal,
 	InitPlayers();
 
   //create the sweet spot calculator
-  m_pSupportSpotCalc = new SupportSpotCalculator(Prm.NumSupportSpotsX,
+  m_pPrior__SupportSpotCalc = new Prior__SupportSpotCalculator(Prm.NumSupportSpotsX,
+                                                        Prm.NumSupportSpotsY,
+                                                        this);
+  // AbstSoccerTeam may still use the default SupportSpotCalculator, so keep it.
+  m_pSupportSpotCalc  = new SupportSpotCalculator(Prm.NumSupportSpotsX,
                                                  Prm.NumSupportSpotsY,
                                                  this);
 
@@ -377,6 +381,52 @@ bool Prior__Team::CanShoot(Vector2D  BallPos,
   return false;
 }
 
+//------------- DetermineBestSupportingAttacker ------------------------
+//
+// calculate the closest player to the SupportSpot
+//------------------------------------------------------------------------
+PlayerBase* Prior__Team::DetermineBestSupportingAttacker()
+{
+  double ClosestSoFar = MaxFloat;
+
+  PlayerBase* BestPlayer = NULL;
+
+  std::vector<PlayerBase*>::iterator it = m_Players.begin();
+
+  for (it; it != m_Players.end(); ++it)
+  {
+    //only attackers utilize the BestSupportingSpot
+    if ( ((*it)->Role() == PlayerBase::attacker) && ((*it) != m_pControllingPlayer) )
+    {
+      //calculate the dist. Use the squared value to avoid sqrt
+      double dist = Vec2DDistanceSq((*it)->Pos(), m_pPrior__SupportSpotCalc->GetBestSupportingSpot());
+    
+      //if the distance is the closest so far and the player is not a
+      //goalkeeper and the player is not the one currently controlling
+      //the ball, keep a record of this player
+      if ((dist < ClosestSoFar) )
+      {
+        ClosestSoFar = dist;
+
+        BestPlayer = (*it);
+      }
+    }
+  }
+
+  return BestPlayer;
+}
+
+Vector2D Prior__Team::GetSupportSpot()const
+{
+  return m_pPrior__SupportSpotCalc->GetBestSupportingSpot();
+}
+
+void Prior__Team::DetermineBestSupportingPosition()const{ 
+  m_pPrior__SupportSpotCalc->DetermineBestSupportingPosition();
+}
+
+
+
 
 // Determines if an upfield pass off the boards can be made to another
 // team member in order to advance the ball towards the enemy goal
@@ -454,6 +504,7 @@ bool Prior__Team::FindPassOffBoards(const PlayerBase*const passer,
     return false;
   }
 }
+
 
 
 bool Prior__Team::GetBestPassToReceiverOffBoards(const PlayerBase* const passer,

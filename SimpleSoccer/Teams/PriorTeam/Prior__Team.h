@@ -22,6 +22,7 @@
 
 #include "Game/Region.h"
 #include "../../SupportSpotCalculator.h"
+#include "Prior__SupportSpotCalculator.h"
 #include "FSM/StateMachine.h"
 #include "../../AbstSoccerTeam.h"
 
@@ -31,7 +32,7 @@ class PlayerBase;
 class Prior__FieldPlayer;
 class Prior__GoalKeeper;
 class SoccerPitch;
-class SupportSpotCalculator;
+class Prior__SupportSpotCalculator;
 
 class Prior__Team : public AbstSoccerTeam
 {
@@ -58,6 +59,11 @@ public:
   virtual bool CanShoot(Vector2D  BallPos,
                        double     power, 
                        Vector2D&  ShotTarget = Vector2D())const;
+  
+  virtual Vector2D GetSupportSpot()const;
+  virtual void DetermineBestSupportingPosition()const;
+  virtual PlayerBase* DetermineBestSupportingAttacker();
+  Prior__SupportSpotCalculator* m_pPrior__SupportSpotCalc;
 
   // New Methods (Improvement #)
   bool FindPassOffBoards(const PlayerBase*const passer,

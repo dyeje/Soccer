@@ -1,5 +1,6 @@
 #include "Prior__States.h"
 #include "../../AbstSoccerTeam.h"
+#include "Prior__Team.h"
 #include "../../PlayerBase.h"
 #include "Messaging/MessageDispatcher.h"
 #include "../../SoccerMessages.h"
@@ -56,7 +57,7 @@ void Prior__Attacking::Execute(AbstSoccerTeam* team)
   }
 
   //calculate the best position for any supporting attacker to move to
-  team->DetermineBestSupportingPosition();
+  (static_cast<Prior__Team*>(team))->DetermineBestSupportingPosition();
 }
 
 void Prior__Attacking::Exit(AbstSoccerTeam* team)

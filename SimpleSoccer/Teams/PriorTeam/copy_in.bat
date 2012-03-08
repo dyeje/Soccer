@@ -33,5 +33,7 @@ call search_replace.vbs Blazers Prior__ Prior__GoalKeeperStates.h
 call search_replace.vbs Blazers Prior__ Prior__GoalKeeperStates.cpp
 call search_replace.vbs BlazersGoalKeeper Prior__GaolKeeper Prior__GoalKeeperStates.cpp
 
+call search_replace.vbs Blazers Prior__ Prior__SupportSpotCalculator.h
+call search_replace.vbs Blazers Prior__ Prior__SupportSpotCalculator.cpp
 
 
