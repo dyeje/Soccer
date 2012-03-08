@@ -1,5 +1,6 @@
 #include "BlazersStates.h"
 #include "../../AbstSoccerTeam.h"
+#include "BlazersTeam.h"
 #include "../../PlayerBase.h"
 #include "Messaging/MessageDispatcher.h"
 #include "../../SoccerMessages.h"
@@ -56,7 +57,7 @@ void BlazersAttacking::Execute(AbstSoccerTeam* team)
   }
 
   //calculate the best position for any supporting attacker to move to
-  team->DetermineBestSupportingPosition();
+  (static_cast<BlazersTeam*>(team))->DetermineBestSupportingPosition();
 }
 
 void BlazersAttacking::Exit(AbstSoccerTeam* team)

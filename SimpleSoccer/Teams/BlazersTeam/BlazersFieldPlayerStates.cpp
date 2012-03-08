@@ -77,7 +77,8 @@ bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
       }
       
       //set the target to be the best supporting position
-      player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+      player->Steering()->SetTarget(static_cast<BlazersTeam*>(player->Team())->GetSupportSpot());
+      // player->Steering()->SetTarget(player->Team()->GetSupportSpot());
 
       //change the state
       player->GetFSM()->ChangeState(BlazersSupportAttacker::Instance());
@@ -241,7 +242,7 @@ void BlazersSupportAttacker::Enter(FieldPlayer* player)
 {
   player->Steering()->ArriveOn();
 
-  player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+  player->Steering()->SetTarget(static_cast<BlazersTeam*>(player->Team())->GetSupportSpot());
   
   #ifdef PLAYER_STATE_INFO_ON
   debug_con << "Player " << player->ID() << " enters support state" << "";
@@ -262,9 +263,10 @@ void BlazersSupportAttacker::Execute(FieldPlayer* player)
 
 
   //if the best supporting spot changes, change the steering target
-  if (player->Team()->GetSupportSpot() != player->Steering()->Target())
+  Vector2D supportSpot = static_cast<BlazersTeam*>(player->Team())->GetSupportSpot();
+  if (supportSpot != player->Steering()->Target())
   {    
-    player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+    player->Steering()->SetTarget(supportSpot);
 
     player->Steering()->ArriveOn();
   }
