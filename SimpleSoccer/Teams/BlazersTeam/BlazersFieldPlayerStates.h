@@ -192,6 +192,9 @@ public:
   bool OnMessage(FieldPlayer*, const Telegram&){return false;}
 };
 
+
+// Improvement # 4 - New Defensive state
+
 //------------------------------------------------------------------------
 class BlazersDefenseMeister: public State<FieldPlayer>
 {

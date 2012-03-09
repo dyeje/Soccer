@@ -77,8 +77,10 @@ bool BlazersGlobalPlayerState::OnMessage(FieldPlayer* player, const Telegram& te
       }
       
       //set the target to be the best supporting position
+
+      // Use Blazer's SupportSpot code
       player->Steering()->SetTarget(static_cast<BlazersTeam*>(player->Team())->GetSupportSpot());
-      // player->Steering()->SetTarget(player->Team()->GetSupportSpot());
+      // original: player->Steering()->SetTarget(player->Team()->GetSupportSpot());
 
       //change the state
       player->GetFSM()->ChangeState(BlazersSupportAttacker::Instance());
@@ -197,14 +199,21 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
     return;
   }
 
+  // If this is the DefenseMeister player, and the ball is crosses over
+  // the center line, switch back into DefenseMeister mode.
   BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
   if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
-    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337  //plyr->Pitch()->cxClient()/2 )
+    && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > 337
     && player->Pitch()->GameOn() )
     player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
 
   // Default to chase ball, a mutch better defense
   player->Steering()->SetTarget(player->Ball()->Pos());
+
+  // Improvement # 5 -- Reamin in chase mode more often.  This is achieved
+  // simply by removing the following code, especially the going back to 
+  // home region which is way too passive.  Because we're going to keep 
+  // chasing it, we save CPU cycles by 
 
   //if the player is the closest player to the ball then he should keep
   //chasing it
@@ -256,6 +265,9 @@ void BlazersSupportAttacker::Execute(FieldPlayer* player)
   {
     player->GetFSM()->ChangeState(BlazersReturnToHomeRegion::Instance()); return;
   } 
+
+  // The following did not help, it's best at this point to leave the DefenseMeister
+  // player in the SupportAttacker state.
   //BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
   //if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14) 
   //  && fabs(plyr->Team()->HomeGoal()->Center().x - plyr->Pos().x) > plyr->Pitch()->cxClient() / 2 )
@@ -366,9 +378,9 @@ void BlazersReturnToHomeRegion::Execute(FieldPlayer* player)
   //home region
   else if(!player->Pitch()->GameOn() && player->AtTarget())
   {
-    // Doing the following cuases the defense meister to not enter wait,
-    // and the game pauses with all the other players in the home region -
-    // the prep for kick off must require they all be in wait state to start
+    // Doing the following cuased the defense meister to not enter wait
+    // and the game to freeze after a score, as all the other players went to
+    // their home region and waited, where DefenseMeister didn't.  
     //
     // If player is designated defense meister, place them back in that
     // state instead of wait.
@@ -383,14 +395,8 @@ void BlazersReturnToHomeRegion::Execute(FieldPlayer* player)
 
 void BlazersReturnToHomeRegion::Exit(FieldPlayer* player)
 {
-  // player->Steering()->ArriveOff();
-  // If player is designated defense meister, place them back in that state
-  // BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
-  // if(plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
-  //   player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
-  // else
-    player->Steering()->ArriveOff();
- }
+  player->Steering()->ArriveOff();
+}
 
 
 
@@ -440,9 +446,10 @@ void BlazersWait::Execute(FieldPlayer* player)
     player->TrackBall();
   }
 
+  // If this is the DefenseMeister player switch back into 
+  // DefenseMeister mode.  Don't be a passive waiter....
   BlazersFieldPlayer* plyr = static_cast<BlazersFieldPlayer*>(player);
   if((plyr->HomeRegion() == 5 || plyr->HomeRegion() == 14)
-    //&& ( !plyr->Team()->GetFSM()->isInState(*BlazersPrepareForKickOff::Instance())) 
     && plyr->Pitch()->GameOn() ) {
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
   }
@@ -578,32 +585,26 @@ void BlazersKickBall::Execute(FieldPlayer* player)
    player->Ball()->Kick(KickDirection, power);
     
    //change state   
-   //player->GetFSM()->ChangeState(BlazersWait::Instance());
+
+   // If this is the DefenseMeister player switch back into 
+   // DefenseMeister mode.  Don't be a passive waiter....
     if(defenseMeister && player->Pitch()->GameOn())
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
     else
       player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
+
+   //original: player->GetFSM()->ChangeState(BlazersWait::Instance());
    
    player->FindSupport();
   
    return;
  }
 
- 
   // 2) Attempt a pass to a player (original Buckland way)
 
   PlayerBase* receiver = NULL; //if a receiver is found this will point to it
   power = Prm.MaxPassingForce * dot;
 
-  // If there are any potential candidates available to receive a pass, then pass
-  //bool findPass = player->Team()->FindPass(player,
-  //                            receiver,
-  //                            BallTarget,
-  //                            power,
-  //                            Prm.MinPassDist);
-  //bool passBall = (findPass && (defenseMeister || player->isThreatened())); 
-
-  //if(passBall)
   if (player->isThreatened()  &&
       player->Team()->FindPass(player,
                               receiver,
@@ -634,11 +635,14 @@ void BlazersKickBall::Execute(FieldPlayer* player)
 
     //the player should wait at his current position unless instruced
     //otherwise  
-    //player->GetFSM()->ChangeState(BlazersWait::Instance());
+
+    // If this is the DefenseMeister player switch back into 
+    // DefenseMeister mode.  Don't be a passive waiter....
     if(defenseMeister && plyr->Pitch()->GameOn())
       player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
     else
       player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
+    //original: player->GetFSM()->ChangeState(BlazersWait::Instance());
 
     player->FindSupport();
 
@@ -797,9 +801,8 @@ void BlazersReceiveBall::Exit(FieldPlayer* player)
 }
 
 
-
-
-
+//************************************************************************     DEFENSE MEISTER
+// Improvement # 4 - New Defensive state
 BlazersDefenseMeister* BlazersDefenseMeister::Instance()
 {
   static BlazersDefenseMeister instance;
@@ -809,7 +812,9 @@ BlazersDefenseMeister* BlazersDefenseMeister::Instance()
 
 void BlazersDefenseMeister::Enter(FieldPlayer* player)
 {
-  // Interpose between goalie and ball
+  // Interpose between goalie and ball.  Uses a ratio so as the ball is closer
+  // to the goal, the this player will be closer to the goalie and thus act
+  // like as a second goalie)
   double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
   player->Steering()->InterposeOn(interpose);
 
@@ -820,11 +825,18 @@ void BlazersDefenseMeister::Enter(FieldPlayer* player)
 
 void BlazersDefenseMeister::Execute(FieldPlayer* player)
 {
+  // If the ball is within reach on OUR side of the field, go into
+  // offense mode and chase it (don't chase it onto the opponent 
+  // side, as then getting back into a good DefenseMeister position
+  // would take too long as there is too much field to cover).  If 
+  // the ball is not w/in reach, simply update target and reamin in 
+  // this state.
   if(Vec2DDistance(player->Pos(), player->Ball()->Pos()) < 100 &&
     player->Ball()->Pos().x > 350) {
     player->GetFSM()->ChangeState(BlazersChaseBall::Instance());
   }
   else {
+    // Same as ::Enter
     double interpose = fabs(player->Ball()->Pos().x - player->Pos().x)*0.65;
     player->Steering()->InterposeOn(interpose);
 
@@ -834,8 +846,6 @@ void BlazersDefenseMeister::Execute(FieldPlayer* player)
   }
 }
 
-void BlazersDefenseMeister::Exit(FieldPlayer* player)
-{
-}
+void BlazersDefenseMeister::Exit(FieldPlayer* player){}
 
 
