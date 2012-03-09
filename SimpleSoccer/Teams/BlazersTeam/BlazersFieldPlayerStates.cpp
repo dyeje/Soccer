@@ -207,13 +207,12 @@ void BlazersChaseBall::Execute(FieldPlayer* player)
     && player->Pitch()->GameOn() )
     player->GetFSM()->ChangeState(BlazersDefenseMeister::Instance());
 
-  // Default to chase ball, a mutch better defense
-  player->Steering()->SetTarget(player->Ball()->Pos());
-
   // Improvement # 5 -- Reamin in chase mode more often.  This is achieved
-  // simply by removing the following code, especially the going back to 
+  // simply by removing the following code, with the excpetion of 
+  // SetTarget().  We especially don't want to going back to 
   // home region which is way too passive.  Because we're going to keep 
   // chasing it, we save CPU cycles by 
+  player->Steering()->SetTarget(player->Ball()->Pos());
 
   //if the player is the closest player to the ball then he should keep
   //chasing it
