@@ -55,30 +55,31 @@ public:
 	
   void UpdateTargetsOfWaitingPlayers()const;
 
-  // Override AbstSoccerTeam::CanShoot (Improvement #)
+  // Override AbstSoccerTeam::CanShoot (Improvement #1)
   virtual bool CanShoot(Vector2D  BallPos,
                        double     power, 
                        Vector2D&  ShotTarget = Vector2D())const;
-  
+
+  // Override AbstSoccerTeam supproting spot code to use custom
   virtual Vector2D GetSupportSpot()const;
   virtual void DetermineBestSupportingPosition()const;
   virtual PlayerBase* DetermineBestSupportingAttacker();
   BlazersSupportSpotCalculator* m_pBlazersSupportSpotCalc;
 
-  // New Methods (Improvement #)
-  bool FindPassOffBoards(const PlayerBase*const passer,
-                        PlayerBase*&            receiver,
-                        Vector2D&               PassTarget,
-                        double                  power,
-                        double                  MinPassingDistance)const;
-  bool GetBestPassToReceiverOffBoards(const PlayerBase* const passer,
-                                      const PlayerBase* const receiver,
-                                      Vector2D&         PassTarget,
-                                      double            power)const;
+  //// Improvement #2 (CPU cost outweighted benefit)
+  //bool FindPassOffBoards(const PlayerBase*const passer,
+  //                      PlayerBase*&            receiver,
+  //                      Vector2D&               PassTarget,
+  //                      double                  power,
+  //                      double                  MinPassingDistance)const;
+  //bool GetBestPassToReceiverOffBoards(const PlayerBase* const passer,
+  //                                    const PlayerBase* const receiver,
+  //                                    Vector2D&         PassTarget,
+  //                                    double            power)const;
 
+  // Cached items (Effiiency gains)
   void SetBlazersGoalie(PlayerBase* player);
   PlayerBase* GetBlazersGoalie();
-
 	double goalYMin;
 	double goalYMax;
 	double ballRadius;
